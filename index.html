@@ -2,53 +2,190 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IoT Moment of Inertia Timer</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    body { font-family: Arial, sans-serif; text-align: center; background: #f4f4f4; }
-    h1 { color: #333; }
-    .container { max-width: 900px; margin: 20px auto; }
-    .card { background: white; padding: 15px; margin: 15px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    :root {
+      --primary: #0066ff;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e2937);
+      color: #e2e8f0;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+      color: white;
+    }
+    .subtitle {
+      text-align: center;
+      color: #94a3b8;
+      margin-bottom: 30px;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    .card {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+    .card h3 {
+      margin: 0 0 8px 0;
+      font-size: 1.1rem;
+      color: #94a3b8;
+    }
+    .card p {
+      font-size: 2rem;
+      font-weight: 600;
+      margin: 0;
+      color: white;
+    }
+    .chart-container {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+    .status {
+      text-align: center;
+      font-size: 1.1rem;
+      padding: 12px 20px;
+      background: rgba(0, 255, 100, 0.15);
+      color: #22c55e;
+      border-radius: 50px;
+      display: inline-block;
+      margin: 10px 0;
+    }
   </style>
 </head>
 <body>
-  <h1>IoT Moment of Inertia Timer</h1>
   <div class="container">
-    <div class="card">
-      <h2>Waktu Gelinding</h2>
-      <h3 id="waktu">0.00 s</h3>
+    <h1>IoT Moment of Inertia Timer</h1>
+    <p class="subtitle">Real-time Pengukuran Momen Inersia Fisika XI</p>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Waktu Gelinding</h3>
+        <p id="waktu">0.00 s</p>
+      </div>
+      <div class="card">
+        <h3>Kecepatan</h3>
+        <p id="kecepatan">0.00 m/s</p>
+      </div>
+      <div class="card">
+        <h3>I Eksperimen</h3>
+        <p id="i_eks">0.000000 kg·m²</p>
+      </div>
+      <div class="card">
+        <h3>Error</h3>
+        <p id="error">0.00 %</p>
+      </div>
     </div>
-    <div class="card">
-      <h2>Kecepatan</h2>
-      <h3 id="kecepatan">0.00 m/s</h3>
+
+    <div class="chart-container">
+      <h2 style="margin-top:0; text-align:center;">Perbandingan Momen Inersia</h2>
+      <canvas id="myChart" height="120"></canvas>
     </div>
-    <div class="card">
-      <h2>Momen Inersia Eksperimen</h2>
-      <h3 id="i_eks">0.000000 kg·m²</h3>
-    </div>
-    <div class="card">
-      <h2>Error</h2>
-      <h3 id="error">0.00 %</h3>
+
+    <div style="text-align:center; margin-top:20px; color:#64748b;">
+      Terakhir update: <span id="lastUpdate">—</span>
     </div>
   </div>
 
   <script>
-    const channelID = "MASUKKAN_CHANNEL_ID_KAMU";   // GANTI
+    const channelID = "MASUKKAN_CHANNEL_ID_KAMU";     // GANTI
     const readAPIKey = "MASUKKAN_READ_API_KEY_KAMU"; // GANTI
 
-    async function updateData() {
-      const url = `https://api.thingspeak.com/channels/${channelID}/feeds/last.json?api_key=${readAPIKey}`;
-      const res = await fetch(url);
-      const data = await res.json();
+    let chart;
 
-      document.getElementById('waktu').textContent = parseFloat(data.field1).toFixed(3) + " s";
-      document.getElementById('kecepatan').textContent = parseFloat(data.field2).toFixed(3) + " m/s";
-      document.getElementById('i_eks').textContent = parseFloat(data.field3).toFixed(6) + " kg·m²";
-      document.getElementById('error').textContent = parseFloat(data.field8).toFixed(2) + " %";
+    async function updateData() {
+      try {
+        const url = `https://api.thingspeak.com/channels/${channelID}/feeds/last.json?api_key=${readAPIKey}`;
+        const res = await fetch(url);
+        const data = await res.json();
+
+        document.getElementById('waktu').textContent = parseFloat(data.field1 || 0).toFixed(3) + " s";
+        document.getElementById('kecepatan').textContent = parseFloat(data.field2 || 0).toFixed(3) + " m/s";
+        document.getElementById('i_eks').textContent = parseFloat(data.field3 || 0).toFixed(6) + " kg·m²";
+        document.getElementById('error').textContent = parseFloat(data.field6 || 0).toFixed(2) + " %";
+
+        document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString('id-ID');
+
+        // Update Chart
+        if (chart) {
+          chart.data.labels.push(new Date().toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'}));
+          chart.data.datasets[0].data.push(parseFloat(data.field3 || 0));
+          chart.data.datasets[1].data.push(parseFloat(data.field4 || 0));
+          if (chart.data.labels.length > 20) {
+            chart.data.labels.shift();
+            chart.data.datasets[0].data.shift();
+            chart.data.datasets[1].data.shift();
+          }
+          chart.update();
+        }
+      } catch(e) {}
     }
 
-    setInterval(updateData, 5000);  // Update setiap 5 detik
-    updateData();
+    // Inisialisasi Chart
+    function initChart() {
+      const ctx = document.getElementById('myChart');
+      chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: [],
+          datasets: [
+            {
+              label: 'I Eksperimen',
+              borderColor: '#22c55e',
+              backgroundColor: 'rgba(134, 239, 172, 0.2)',
+              data: [],
+              borderWidth: 3,
+              tension: 0.4
+            },
+            {
+              label: 'I Teoretis',
+              borderColor: '#a855f7',
+              backgroundColor: 'rgba(168, 85, 247, 0.2)',
+              data: [],
+              borderWidth: 3,
+              tension: 0.4
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { position: 'top' } },
+          scales: {
+            y: { beginAtZero: true, title: { display: true, text: 'Momen Inersia (kg·m²)' } }
+          }
+        }
+      });
+    }
+
+    // Jalankan
+    window.onload = () => {
+      initChart();
+      updateData();
+      setInterval(updateData, 4000);  // Update setiap 4 detik
+    };
   </script>
 </body>
 </html>
