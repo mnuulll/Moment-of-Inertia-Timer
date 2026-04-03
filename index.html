@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kelompok 10 - IoT Moment of Inertia Timer</title>
+  <title>IoT Moment of Inertia Timer</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body { font-family: 'Inter', sans-serif; background: #0f172a; color: #e2e8f0; margin: 0; padding: 20px; }
     .container { max-width: 1200px; margin: auto; }
     h1 { text-align: center; margin-bottom: 5px; }
-    .subtitle { text-align: center; color: #94a3b8; font-size: 1.3rem; margin-bottom: 30px; }
+    .subtitle { text-align: center; color: #94a3b8; font-size: 1.4rem; margin-bottom: 30px; }
     .control { background: #1e2937; padding: 20px; border-radius: 16px; margin-bottom: 25px; text-align: center; }
     select, button { padding: 12px 24px; font-size: 1.1rem; border-radius: 12px; margin: 8px; }
     button { background: #22c55e; color: black; font-weight: bold; cursor: pointer; }
@@ -20,13 +20,13 @@
     .card p { font-size: 2.1rem; margin: 0; font-weight: 600; }
     .chart-container { background: #1e2937; padding: 20px; border-radius: 16px; margin-bottom: 25px; }
     .legend { text-align: center; margin-top: 8px; font-size: 1rem; }
-    .legend span { margin: 0 15px; }
+    .credit { text-align: center; margin-top: 50px; color: #64748b; font-size: 1rem; }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Kelompok 10</h1>
-    <p class="subtitle">IoT Moment of Inertia Timer</p>
+    <h1>IoT Moment of Inertia Timer</h1>
+    <p class="subtitle">Kelompok 10</p>
 
     <!-- Control Panel -->
     <div class="control">
@@ -75,6 +75,13 @@
       <canvas id="chartITeo" height="140"></canvas>
       <div class="legend"><span style="color:#3b82f6;">● Silinder</span> <span style="color:#ef4444;">● Bola</span></div>
     </div>
+
+    <!-- Credit -->
+    <div class="credit">
+      <p>Credit by: Kelompok 10</p>
+      <p id="anggota">Anggota Kelompok: (isi sendiri)</p>
+      <p>Tugas Proyek Fisika Dinamika</p>
+    </div>
   </div>
 
   <script>
@@ -84,7 +91,6 @@
 
     let chartWaktu, chartKecepatan, chartIEks, chartITeo;
 
-    // Suara
     function speak(text) {
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = "id-ID";
@@ -95,13 +101,13 @@
       const jenis = document.getElementById('jenisBenda').value;
       const url = `https://api.thingspeak.com/update?api_key=${writeAPIKey}&field5=${jenis}`;
       await fetch(url);
-      speak("Silahkan kirimkan pilihanmu ke ESP 32 dan mulai programnya");
+      speak("Kirim pilihan ke alat dan mulai programnya");
     }
 
     async function mulaiProgram() {
       const url = `https://api.thingspeak.com/update?api_key=${writeAPIKey}&field9=1`;
       await fetch(url);
-      speak("ESP 32 siap untuk mendeteksi benda, silahkan lepaskan bendanya");
+      speak("Alat sudah siap, lepaskan benda dari atas ramp");
     }
 
     async function updateData() {
@@ -116,14 +122,18 @@
       document.getElementById('error').textContent = parseFloat(data.field6 || 0).toFixed(2) + " %";
 
       if (parseFloat(data.field1) > 0) {
-        speak("Data sudah ada, silahkan dilihat");
+        speak("Data sudah ada, silahkan lihat");
       }
     }
 
     window.onload = () => {
+      // Suara pertama setelah 10 detik
+      setTimeout(() => {
+        speak("Pilihlah benda yang akan kamu gelindingkan");
+      }, 10000);
+
       updateData();
       setInterval(updateData, 5000);
-      speak("Pilihlah benda yang akan di gelindingkan");
     };
   </script>
 </body>
