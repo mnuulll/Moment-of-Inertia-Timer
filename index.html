@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>IoT Moment of Inertia Timer</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; background: #f4f4f4; }
+    h1 { color: #333; }
+    .container { max-width: 900px; margin: 20px auto; }
+    .card { background: white; padding: 15px; margin: 15px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+  </style>
+</head>
+<body>
+  <h1>IoT Moment of Inertia Timer</h1>
+  <div class="container">
+    <div class="card">
+      <h2>Waktu Gelinding</h2>
+      <h3 id="waktu">0.00 s</h3>
+    </div>
+    <div class="card">
+      <h2>Kecepatan</h2>
+      <h3 id="kecepatan">0.00 m/s</h3>
+    </div>
+    <div class="card">
+      <h2>Momen Inersia Eksperimen</h2>
+      <h3 id="i_eks">0.000000 kg·m²</h3>
+    </div>
+    <div class="card">
+      <h2>Error</h2>
+      <h3 id="error">0.00 %</h3>
+    </div>
+  </div>
+
+  <script>
+    const channelID = "MASUKKAN_CHANNEL_ID_KAMU";   // GANTI
+    const readAPIKey = "MASUKKAN_READ_API_KEY_KAMU"; // GANTI
+
+    async function updateData() {
+      const url = `https://api.thingspeak.com/channels/${channelID}/feeds/last.json?api_key=${readAPIKey}`;
+      const res = await fetch(url);
+      const data = await res.json();
+
+      document.getElementById('waktu').textContent = parseFloat(data.field1).toFixed(3) + " s";
+      document.getElementById('kecepatan').textContent = parseFloat(data.field2).toFixed(3) + " m/s";
+      document.getElementById('i_eks').textContent = parseFloat(data.field3).toFixed(6) + " kg·m²";
+      document.getElementById('error').textContent = parseFloat(data.field8).toFixed(2) + " %";
+    }
+
+    setInterval(updateData, 5000);  // Update setiap 5 detik
+    updateData();
+  </script>
+</body>
+</html>
