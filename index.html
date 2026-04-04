@@ -6,62 +6,34 @@
   <title>IoT Moment of Inertia Timer</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    body { 
-      font-family: 'Inter', sans-serif; 
-      background: #0f172a; 
-      color: #e2e8f0; 
-      margin: 0; 
-      padding: 20px; 
-    }
+    body { font-family: 'Inter', sans-serif; background: #0f172a; color: #e2e8f0; margin: 0; padding: 20px; }
     .container { max-width: 1200px; margin: auto; }
-
-    /* Header - Logo kiri, tulisan di tengah */
-    .header { 
-      display: flex; 
-      align-items: center; 
-      justify-content: center; 
-      margin-bottom: 20px; 
-      position: relative; 
-    }
-    .logo { 
-      width: 70px; 
-      height: 70px; 
-      margin-right: 20px;  
-    }
-    .title-group { 
-      text-align: center; 
-    }
+    .header { display: flex; align-items: center; margin-bottom: 15px; }
+    .logo { width: 70px; height: 70px; margin-right: 15px; border-radius: 50%; }
     h1 { margin: 0; font-size: 2.1rem; }
-    .subtitle { color: #94a3b8; font-size: 1.35rem; margin-top: 5px; }
-
+    .subtitle { color: #94a3b8; font-size: 1.35rem; margin-bottom: 25px; text-align: center; }
     .control { background: #1e2937; padding: 20px; border-radius: 16px; margin-bottom: 25px; text-align: center; }
     select, button { padding: 12px 24px; font-size: 1.1rem; border-radius: 12px; margin: 8px; }
     button { background: #22c55e; color: black; font-weight: bold; cursor: pointer; }
     button:hover { background: #16a34a; }
-
     .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-bottom: 30px; }
     .card { background: #1e2937; padding: 20px; border-radius: 16px; text-align: center; }
     .card h3 { margin: 0 0 8px 0; color: #94a3b8; }
     .card p { font-size: 2rem; margin: 0; font-weight: 600; }
-
     .chart-container { background: #1e2937; padding: 20px; border-radius: 16px; margin-bottom: 25px; }
     .legend { text-align: center; margin-top: 8px; font-size: 1rem; }
-
-    .credit { text-align: center; margin-top: 60px; color: #64748b; font-size: 0.95rem; line-height: 1.6; }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- Header -->
     <div class="header">
-      <img src="https://mnuulll.github.io/Moment-of-Inertia-Timer/logo-sman1.png" alt="Logo SMAN 1 Gegesik" class="logo">
-      <div class="title-group">
+      <img src="mnuulll.github.io/Moment-of-Inertia-Timer/logo-sman1.png" alt="Logo SMAN 1 Gegesik" class="logo">
+      <div>
         <h1>IoT Moment of Inertia Timer</h1>
         <p class="subtitle">Kelompok 10</p>
       </div>
     </div>
 
-    <!-- Control Panel -->
     <div class="control">
       <h2>Pilih Jenis Benda</h2>
       <select id="jenisBenda">
@@ -72,7 +44,6 @@
       <button onclick="mulaiProgram()" style="background:#ef4444;">▶ Mulai Program</button>
     </div>
 
-    <!-- Cards -->
     <div class="cards">
       <div class="card"><h3>Waktu</h3><p id="waktu">0.00 s</p></div>
       <div class="card"><h3>Kecepatan</h3><p id="kecepatan">0.00 m/s</p></div>
@@ -81,7 +52,6 @@
       <div class="card"><h3>Error</h3><p id="error">0.00 %</p></div>
     </div>
 
-    <!-- Grafik -->
     <div class="chart-container">
       <h2>Grafik Waktu Gelinding</h2>
       <canvas id="chartWaktu" height="140"></canvas>
@@ -105,63 +75,87 @@
       <canvas id="chartITeo" height="140"></canvas>
       <div class="legend"><span style="color:#3b82f6;">● Silinder</span> <span style="color:#ef4444;">● Bola</span></div>
     </div>
-
-    <!-- Credit -->
-    <div class="credit">
-      <p>Credit by: Kelompok 10</p>
-      <p>Anggota: Mohammad Rizky Imanulhaq (Ketua), Denok Durrotun Nashah, Dita Rosdiyana, Eris Setiyawan, Gilang Haikal Rizkyan</p>
-      <p>Desainer: Mohammad Rizky Imanulhaq</p>
-      <p>Tugas Proyek Fisika Dinamika</p>
-    </div>
   </div>
 
   <script>
-  const channelID = "3322771";
-  const writeAPIKey = "E6OXEGOWDWYC2AZJ";   // PASTIKAN INI BENAR
-  const readAPIKey = "HHB2NFTH1VBQQLDR";
+    const channelID = "3322771";
+    const writeAPIKey = "E6OXEGOWDWYC2AZJ";
+    const readAPIKey = "HHB2NFTH1VBQQLDR";
 
-  function speak(text) {
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = "id-ID";
-    speechSynthesis.speak(utterance);
-  }
+    let chartWaktu, chartKecepatan, chartIEks, chartITeo;
 
-  async function kirimPilihan() {
-    const jenis = document.getElementById('jenisBenda').value;
-    const url = `https://api.thingspeak.com/update?api_key=${writeAPIKey}&field5=${jenis}`;
-    await fetch(url);
-    speak("Kirim pilihan ke alat dan mulai programnya");
-  }
-
-  // === INI YANG SUDAH DIPERBAIKI ===
-  async function mulaiProgram() {
-    const url = `https://api.thingspeak.com/update?api_key=${writeAPIKey}&field7=1`;
-    const response = await fetch(url);
-    
-    if (response.ok) {
-      speak("Alat sudah siap, lepaskan benda dari atas ramp");
-    } else {
-      alert("Gagal mengirim perintah ke ESP32");
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "id-ID";
+      speechSynthesis.speak(utterance);
     }
-  }
 
-  async function updateData() {
-    const url = `https://api.thingspeak.com/channels/${channelID}/feeds/last.json?api_key=${readAPIKey}`;
-    const res = await fetch(url);
-    const data = await res.json();
+    async function kirimPilihan() {
+      const jenis = document.getElementById('jenisBenda').value;
+      const url = `https://api.thingspeak.com/update?api_key=${writeAPIKey}&field5=${jenis}`;
+      await fetch(url);
+      speak("Kirim pilihan ke alat dan mulai programnya");
+    }
 
-    document.getElementById('waktu').textContent = parseFloat(data.field1 || 0).toFixed(3) + " s";
-    document.getElementById('kecepatan').textContent = parseFloat(data.field2 || 0).toFixed(3) + " m/s";
-    document.getElementById('i_eks').textContent = parseFloat(data.field3 || 0).toFixed(6) + " kg·m²";
-    document.getElementById('i_teo').textContent = parseFloat(data.field4 || 0).toFixed(6) + " kg·m²";
-    document.getElementById('error').textContent = parseFloat(data.field6 || 0).toFixed(2) + " %";
-  }
+    async function mulaiProgram() {
+      const url = `https://api.thingspeak.com/update?api_key=${writeAPIKey}&field7=1`;
+      await fetch(url);
+      speak("Alat sudah siap, lepaskan benda dari atas ramp");
+    }
 
-  window.onload = () => {
-    setTimeout(() => speak("Pilihlah benda yang akan kamu gelindingkan"), 10000);
-    updateData();
-    setInterval(updateData, 5000);
-  };
-</script>
+    async function updateData() {
+      const url = `https://api.thingspeak.com/channels/${channelID}/feeds/last.json?api_key=${readAPIKey}`;
+      const res = await fetch(url);
+      const data = await res.json();
+
+      // Update Card
+      document.getElementById('waktu').textContent = parseFloat(data.field1 || 0).toFixed(3) + " s";
+      document.getElementById('kecepatan').textContent = parseFloat(data.field2 || 0).toFixed(3) + " m/s";
+      document.getElementById('i_eks').textContent = parseFloat(data.field3 || 0).toFixed(6) + " kg·m²";
+      document.getElementById('i_teo').textContent = parseFloat(data.field4 || 0).toFixed(6) + " kg·m²";
+      document.getElementById('error').textContent = parseFloat(data.field6 || 0).toFixed(2) + " %";
+
+      // Update semua grafik dengan data terbaru
+      const timeLabel = new Date().toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'});
+
+      if (chartWaktu) {
+        chartWaktu.data.labels.push(timeLabel);
+        chartWaktu.data.datasets[0].data.push(parseFloat(data.field1 || 0));
+        if (chartWaktu.data.labels.length > 15) chartWaktu.data.labels.shift(), chartWaktu.data.datasets[0].data.shift();
+        chartWaktu.update();
+      }
+      if (chartKecepatan) {
+        chartKecepatan.data.labels.push(timeLabel);
+        chartKecepatan.data.datasets[0].data.push(parseFloat(data.field2 || 0));
+        if (chartKecepatan.data.labels.length > 15) chartKecepatan.data.labels.shift(), chartKecepatan.data.datasets[0].data.shift();
+        chartKecepatan.update();
+      }
+      if (chartIEks) {
+        chartIEks.data.labels.push(timeLabel);
+        chartIEks.data.datasets[0].data.push(parseFloat(data.field3 || 0));
+        if (chartIEks.data.labels.length > 15) chartIEks.data.labels.shift(), chartIEks.data.datasets[0].data.shift();
+        chartIEks.update();
+      }
+      if (chartITeo) {
+        chartITeo.data.labels.push(timeLabel);
+        chartITeo.data.datasets[0].data.push(parseFloat(data.field4 || 0));
+        if (chartITeo.data.labels.length > 15) chartITeo.data.labels.shift(), chartITeo.data.datasets[0].data.shift();
+        chartITeo.update();
+      }
+    }
+
+    function initCharts() {
+      chartWaktu = new Chart(document.getElementById('chartWaktu'), { type: 'line', data: { labels: [], datasets: [{ label: 'Waktu (s)', borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
+      chartKecepatan = new Chart(document.getElementById('chartKecepatan'), { type: 'line', data: { labels: [], datasets: [{ label: 'Kecepatan (m/s)', borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
+      chartIEks = new Chart(document.getElementById('chartIEks'), { type: 'line', data: { labels: [], datasets: [{ label: 'I Eksperimen', borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
+      chartITeo = new Chart(document.getElementById('chartITeo'), { type: 'line', data: { labels: [], datasets: [{ label: 'I Teoretis', borderColor: '#ef4444', data: [] }] }, options: { responsive: true } });
+    }
+
+    window.onload = () => {
+      initCharts();
+      updateData();
+      setInterval(updateData, 4000);   // Update setiap 4 detik
+    };
+  </script>
 </body>
 </html>
