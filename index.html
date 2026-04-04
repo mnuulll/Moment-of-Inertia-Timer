@@ -8,10 +8,11 @@
   <style>
     body { font-family: 'Inter', sans-serif; background: #0f172a; color: #e2e8f0; margin: 0; padding: 20px; }
     .container { max-width: 1200px; margin: auto; }
-    .header { display: flex; align-items: center; margin-bottom: 15px; }
+    .header { display: flex; align-items: center; margin-bottom: 10px; }
     .logo { width: 70px; height: 70px; margin-right: 15px; border-radius: 50%; }
     h1 { margin: 0; font-size: 2.1rem; }
-    .subtitle { color: #94a3b8; font-size: 1.35rem; margin-bottom: 25px; text-align: center; }
+    .subtitle { color: #94a3b8; font-size: 1.35rem; margin-bottom: 8px; text-align: center; }
+    .description { text-align: center; color: #cbd5e1; font-size: 1.1rem; margin-bottom: 30px; }
     .control { background: #1e2937; padding: 20px; border-radius: 16px; margin-bottom: 25px; text-align: center; }
     select, button { padding: 12px 24px; font-size: 1.1rem; border-radius: 12px; margin: 8px; }
     button { background: #22c55e; color: black; font-weight: bold; cursor: pointer; }
@@ -22,6 +23,7 @@
     .card p { font-size: 2rem; margin: 0; font-weight: 600; }
     .chart-container { background: #1e2937; padding: 20px; border-radius: 16px; margin-bottom: 25px; }
     .legend { text-align: center; margin-top: 8px; font-size: 1rem; }
+    .credit { text-align: center; margin-top: 60px; color: #64748b; font-size: 0.95rem; line-height: 1.6; }
   </style>
 </head>
 <body>
@@ -33,6 +35,11 @@
         <p class="subtitle">Kelompok 10</p>
       </div>
     </div>
+
+    <!-- Penjelasan Alat -->
+    <p class="description">
+      Alat ini digunakan untuk mengukur waktu gelinding benda dan menghitung momen inersia secara digital menggunakan sensor LDR dan ESP32.
+    </p>
 
     <div class="control">
       <h2>Pilih Jenis Benda</h2>
@@ -75,14 +82,23 @@
       <canvas id="chartITeo" height="140"></canvas>
       <div class="legend"><span style="color:#3b82f6;">● Silinder</span> <span style="color:#ef4444;">● Bola</span></div>
     </div>
+
+    <!-- Credit -->
+    <div class="credit">
+      <p>Credit by: Kelompok 10</p>
+      <p>Anggota: Mohammad Rizky Imanulhaq (Ketua), Denok Durrotun Nashah, Dita Rosdiyana, Eris Setiyawan, Gilang Haikal Rizkyan</p>
+      <p>Desainer: Mohammad Rizky Imanulhaq</p>
+      <p>Tugas Proyek Fisika Dinamika</p>
+    </div>
   </div>
 
   <script>
-    const channelID = "MASUKKAN_CHANNEL_ID_KAMU";
-    const writeAPIKey = "MASUKKAN_WRITE_API_KEY_KAMU";   // ← Sudah ditambahkan
-    const readAPIKey = "MASUKKAN_READ_API_KEY_KAMU";
+    const channelID = "3322771";
+    const writeAPIKey = "E6OXEGOWDWYC2AZJ";
+    const readAPIKey = "HHB2NFTH1VBQQLDR";
 
     let chartWaktu, chartKecepatan, chartIEks, chartITeo;
+    let lastEntryId = 0;
 
     function speak(text) {
       const utterance = new SpeechSynthesisUtterance(text);
@@ -104,9 +120,13 @@
     }
 
     async function updateData() {
-      const url = `https://api.thingspeak.com/channels/${channelID}/feeds/last.json?api_key=${readAPIKey}`;
+      const url = `https://api.thingspeak.com/channels/${channelID}/feeds.json?api_key=${readAPIKey}&results=1`;
       const res = await fetch(url);
-      const data = await res.json();
+      const json = await res.json();
+      const data = json.feeds[0];
+
+      if (!data || data.entry_id === lastEntryId) return;  // Hanya update jika data baru
+      lastEntryId = data.entry_id;
 
       document.getElementById('waktu').textContent = parseFloat(data.field1 || 0).toFixed(3) + " s";
       document.getElementById('kecepatan').textContent = parseFloat(data.field2 || 0).toFixed(3) + " m/s";
@@ -114,7 +134,9 @@
       document.getElementById('i_teo').textContent = parseFloat(data.field4 || 0).toFixed(6) + " kg·m²";
       document.getElementById('error').textContent = parseFloat(data.field6 || 0).toFixed(2) + " %";
 
-      const label = new Date().toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'});
+      if (parseFloat(data.field1) > 0) speak("Data sudah ada, silahkan lihat");
+
+      const label = new Date(data.created_at).toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'});
 
       if (chartWaktu) {
         chartWaktu.data.labels.push(label);
@@ -164,7 +186,7 @@
     window.onload = () => {
       initCharts();
       updateData();
-      setInterval(updateData, 4000);
+      setInterval(updateData, 3000);   // Cek data baru setiap 3 detik
     };
   </script>
 </body>
