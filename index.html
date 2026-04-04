@@ -116,48 +116,52 @@
   </div>
 
   <script>
-    const channelID = "3322771";
-    const writeAPIKey = "E6OXEGOWDWYC2AZJ";
-    const readAPIKey = "HHB2NFTH1VBQQLDR";
+  const channelID = "3322771";
+  const writeAPIKey = "E6OXEGOWDWYC2AZJ";   // PASTIKAN INI BENAR
+  const readAPIKey = "HHB2NFTH1VBQQLDR";
 
-    function speak(text) {
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = "id-ID";
-      speechSynthesis.speak(utterance);
-    }
+  function speak(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "id-ID";
+    speechSynthesis.speak(utterance);
+  }
 
-    async function kirimPilihan() {
-      const jenis = document.getElementById('jenisBenda').value;
-      const url = `https://api.thingspeak.com/update?api_key=${writeAPIKey}&field5=${jenis}`;
-      await fetch(url);
-      speak("Kirim pilihan ke alat dan mulai programnya");
-    }
+  async function kirimPilihan() {
+    const jenis = document.getElementById('jenisBenda').value;
+    const url = `https://api.thingspeak.com/update?api_key=${writeAPIKey}&field5=${jenis}`;
+    await fetch(url);
+    speak("Kirim pilihan ke alat dan mulai programnya");
+  }
 
-    async function mulaiProgram() {
-      const url = `https://api.thingspeak.com/update?api_key=${writeAPIKey}&field7=1`;
-      await fetch(url);
+  // === INI YANG SUDAH DIPERBAIKI ===
+  async function mulaiProgram() {
+    const url = `https://api.thingspeak.com/update?api_key=${writeAPIKey}&field7=1`;
+    const response = await fetch(url);
+    
+    if (response.ok) {
       speak("Alat sudah siap, lepaskan benda dari atas ramp");
+    } else {
+      alert("Gagal mengirim perintah ke ESP32");
     }
+  }
 
-    async function updateData() {
-      const url = `https://api.thingspeak.com/channels/${channelID}/feeds/last.json?api_key=${readAPIKey}`;
-      const res = await fetch(url);
-      const data = await res.json();
+  async function updateData() {
+    const url = `https://api.thingspeak.com/channels/${channelID}/feeds/last.json?api_key=${readAPIKey}`;
+    const res = await fetch(url);
+    const data = await res.json();
 
-      document.getElementById('waktu').textContent = parseFloat(data.field1 || 0).toFixed(3) + " s";
-      document.getElementById('kecepatan').textContent = parseFloat(data.field2 || 0).toFixed(3) + " m/s";
-      document.getElementById('i_eks').textContent = parseFloat(data.field3 || 0).toFixed(6) + " kg·m²";
-      document.getElementById('i_teo').textContent = parseFloat(data.field4 || 0).toFixed(6) + " kg·m²";
-      document.getElementById('error').textContent = parseFloat(data.field6 || 0).toFixed(2) + " %";
+    document.getElementById('waktu').textContent = parseFloat(data.field1 || 0).toFixed(3) + " s";
+    document.getElementById('kecepatan').textContent = parseFloat(data.field2 || 0).toFixed(3) + " m/s";
+    document.getElementById('i_eks').textContent = parseFloat(data.field3 || 0).toFixed(6) + " kg·m²";
+    document.getElementById('i_teo').textContent = parseFloat(data.field4 || 0).toFixed(6) + " kg·m²";
+    document.getElementById('error').textContent = parseFloat(data.field6 || 0).toFixed(2) + " %";
+  }
 
-      if (parseFloat(data.field1) > 0) speak("Data sudah ada, silahkan lihat");
-    }
-
-    window.onload = () => {
-      setTimeout(() => speak("Pilihlah benda yang akan kamu gelindingkan"), 10000);
-      updateData();
-      setInterval(updateData, 5000);
-    };
-  </script>
+  window.onload = () => {
+    setTimeout(() => speak("Pilihlah benda yang akan kamu gelindingkan"), 10000);
+    updateData();
+    setInterval(updateData, 5000);
+  };
+</script>
 </body>
 </html>
