@@ -31,10 +31,11 @@
 <body>
   <div class="container">
     <div class="header">
-      <img src="https://username.github.io/nama-repo/logo-sman1.png" alt="Logo SMAN 1 Gegesik" class="logo">
+      <img src="https://mnuulll.github.io/Moment-of-Inertia-Timer/logo-sman1.png" alt="Logo SMAN 1 Gegesik" class="logo">
       <div>
         <h1>IoT Moment of Inertia Timer</h1>
         <p class="subtitle">Kelompok 10</p>
+        <p class="subtitle">Fisika TL Kelas 11 25/26</p>
       </div>
     </div>
 
@@ -48,41 +49,37 @@
         <option value="0">Silinder Padat</option>
         <option value="1">Bola Padat</option>
       </select>
-      <button onclick="kirimPilihan()">Kirim Pilihan ke ESP32</button>
+      <button onclick="kirimPilihan()">Pilih Jenis Benda</button>
       <button onclick="mulaiProgram()" style="background:#ef4444;">▶ Mulai Program</button>
-      <button onclick="resetESP()" style="background:#ef4444;">🔄 Reset ESP32</button>
+      <button onclick="resetESP()" style="background:#ef4444;">🔄 Reset Alat</button>
     </div>
 
     <div class="cards">
-      <div class="card"><h3>Waktu</h3><p id="waktu">0.00 s</p></div>
-      <div class="card"><h3>Kecepatan</h3><p id="kecepatan">0.00 m/s</p></div>
-      <div class="card"><h3>I Eksperimen</h3><p id="i_eks">0.000000 kg·m²</p></div>
-      <div class="card"><h3>I Teoretis</h3><p id="i_teo">0.000000 kg·m²</p></div>
+      <div class="card"><h3>Waktu</h3><p id="waktu">0.00000 s</p></div>
+      <div class="card"><h3>Kecepatan</h3><p id="kecepatan">0.00000 m/s</p></div>
+      <div class="card"><h3>I Eksperimen</h3><p id="i_eks">0.00000000 kg·m²</p></div>
+      <div class="card"><h3>I Teoretis</h3><p id="i_teo">0.00000000 kg·m²</p></div>
       <div class="card"><h3>Error</h3><p id="error">0.00 %</p></div>
     </div>
 
     <div class="chart-container">
       <h2>Grafik Waktu Gelinding</h2>
       <canvas id="chartWaktu" height="140"></canvas>
-      <div class="legend"><span style="color:#3b82f6;">● Silinder</span> <span style="color:#ef4444;">● Bola</span></div>
     </div>
 
     <div class="chart-container">
       <h2>Grafik Kecepatan Gelinding</h2>
       <canvas id="chartKecepatan" height="140"></canvas>
-      <div class="legend"><span style="color:#3b82f6;">● Silinder</span> <span style="color:#ef4444;">● Bola</span></div>
     </div>
 
     <div class="chart-container">
       <h2>Grafik I Eksperimen</h2>
       <canvas id="chartIEks" height="140"></canvas>
-      <div class="legend"><span style="color:#3b82f6;">● Silinder</span> <span style="color:#ef4444;">● Bola</span></div>
     </div>
 
     <div class="chart-container">
       <h2>Grafik I Teoretis</h2>
       <canvas id="chartITeo" height="140"></canvas>
-      <div class="legend"><span style="color:#3b82f6;">● Silinder</span> <span style="color:#ef4444;">● Bola</span></div>
     </div>
 
     <!-- Credit -->
@@ -117,7 +114,7 @@
     async function kirimPilihan() {
       const jenis = document.getElementById('jenisBenda').value;
       db.ref('control/jenisBenda').set(parseInt(jenis));
-      speak("Kirim pilihan ke alat dan mulai programnya");
+      speak("Jenis Benda sudah dikirm");
     }
 
     async function mulaiProgram() {
@@ -127,18 +124,18 @@
 
     async function resetESP() {
       db.ref('control/reset').set(1);
-      speak("ESP32 sedang direset");
+      speak("Alat sedang direset");
     }
 
     function updateData(snapshot) {
       const data = snapshot.val();
       if (!data) return;
 
-      document.getElementById('waktu').textContent = (data.t || 0).toFixed(3) + " s";
-      document.getElementById('kecepatan').textContent = (data.v || 0).toFixed(3) + " m/s";
-      document.getElementById('i_eks').textContent = (data.i_eks || 0).toFixed(6) + " kg·m²";
-      document.getElementById('i_teo').textContent = (data.i_teo || 0).toFixed(6) + " kg·m²";
-      document.getElementById('error').textContent = (data.error || 0).toFixed(2) + " %";
+      document.getElementById('waktu').textContent = (data.t || 0).toFixed(5) + " s";
+      document.getElementById('kecepatan').textContent = (data.v || 0).toFixed(5) + " m/s";
+      document.getElementById('i_eks').textContent = (data.i_eks || 0).toFixed(8) + " kg·m²";
+      document.getElementById('i_teo').textContent = (data.i_teo || 0).toFixed(8) + " kg·m²";
+      document.getElementById('error').textContent = (data.error || 0).toFixed(8) + " %";
 
       const label = new Date().toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'});
 
@@ -190,7 +187,7 @@
     window.onload = () => {
       initCharts();
       db.ref('data').on('value', updateData);
-      setTimeout(() => speak("Pilihlah benda yang akan kamu gelindingkan"), 5000);
+      setTimeout(() => speak("Pilihlah benda yang akan kamu gelindingkan"), 1000);
     };
   </script>
 </body>
