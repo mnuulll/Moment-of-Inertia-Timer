@@ -24,6 +24,8 @@
     .card p { font-size: 2rem; margin: 0; font-weight: 600; }
     .chart-container { background: #1e2937; padding: 20px; border-radius: 16px; margin-bottom: 25px; }
     .legend { text-align: center; margin-top: 8px; font-size: 1rem; }
+    .credit { text-align: center; margin-top: 60px; color: #64748b; font-size: 0.95rem; line-height: 1.6; }
+    .description { text-align: center; color: #cbd5e1; font-size: 1.1rem; margin-bottom: 30px; max-width: 800px; margin-left: auto; margin-right: auto; }
   </style>
 </head>
 <body>
@@ -35,6 +37,10 @@
         <p class="subtitle">Kelompok 10</p>
       </div>
     </div>
+
+    <p class="description">
+      Alat ini digunakan untuk mengukur waktu gelinding benda dan menghitung momen inersia secara digital menggunakan sensor LDR dan ESP32.
+    </p>
 
     <div class="control">
       <h2>Pilih Jenis Benda</h2>
@@ -77,6 +83,14 @@
       <h2>Grafik I Teoretis</h2>
       <canvas id="chartITeo" height="140"></canvas>
       <div class="legend"><span style="color:#3b82f6;">● Silinder</span> <span style="color:#ef4444;">● Bola</span></div>
+    </div>
+
+    <!-- Credit -->
+    <div class="credit">
+      <p>Credit by: Kelompok 10</p>
+      <p>Anggota: Mohammad Rizky Imanulhaq (Ketua), Denok Durrotun Nashah, Dita Rosdiyana, Eris Setiyawan, Gilang Haikal Rizkyan</p>
+      <p>Desainer: Mohammad Rizky Imanulhaq</p>
+      <p>Tugas Proyek Fisika Dinamika</p>
     </div>
   </div>
 
@@ -131,7 +145,7 @@
       if (chartWaktu) {
         chartWaktu.data.labels.push(label);
         chartWaktu.data.datasets[0].data.push(data.t || 0);
-        if (chartWaktu.data.labels.length > 15) {
+        if (chartWaktu.data.labels.length > 10) {
           chartWaktu.data.labels.shift();
           chartWaktu.data.datasets[0].data.shift();
         }
@@ -140,7 +154,7 @@
       if (chartKecepatan) {
         chartKecepatan.data.labels.push(label);
         chartKecepatan.data.datasets[0].data.push(data.v || 0);
-        if (chartKecepatan.data.labels.length > 15) {
+        if (chartKecepatan.data.labels.length > 10) {
           chartKecepatan.data.labels.shift();
           chartKecepatan.data.datasets[0].data.shift();
         }
@@ -149,7 +163,7 @@
       if (chartIEks) {
         chartIEks.data.labels.push(label);
         chartIEks.data.datasets[0].data.push(data.i_eks || 0);
-        if (chartIEks.data.labels.length > 15) {
+        if (chartIEks.data.labels.length > 10) {
           chartIEks.data.labels.shift();
           chartIEks.data.datasets[0].data.shift();
         }
@@ -158,7 +172,7 @@
       if (chartITeo) {
         chartITeo.data.labels.push(label);
         chartITeo.data.datasets[0].data.push(data.i_teo || 0);
-        if (chartITeo.data.labels.length > 15) {
+        if (chartITeo.data.labels.length > 10) {
           chartITeo.data.labels.shift();
           chartITeo.data.datasets[0].data.shift();
         }
@@ -176,7 +190,7 @@
     window.onload = () => {
       initCharts();
       db.ref('data').on('value', updateData);
-      setTimeout(() => speak("Pilihlah benda yang akan kamu gelindingkan"), 8000);
+      setTimeout(() => speak("Pilihlah benda yang akan kamu gelindingkan"), 5000);
     };
   </script>
 </body>
