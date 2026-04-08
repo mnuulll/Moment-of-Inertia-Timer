@@ -13,10 +13,10 @@
     .header { display: flex; align-items: center; justify-content: center; margin-bottom: 15px; flex-wrap: wrap; text-align: center;}
     .logo { width: 70px; height: 70px; margin-right: 15px; border-radius: 50%; }
     h1 { margin: 0; font-size: 2.1rem; }
-    .subtitle { color: #94a3b8; font-size: 1.35rem; margin-bottom: 25px; text-align: center; }
-    .subtitle1 { color: #94a3b8; font-size: 1.20rem; margin-bottom: 25px; text-align: center; }
-    .subtitle2 { color: #94a3b8; font-size: 1.40rem; margin-bottom: 25px; text-align: center; font-weight: bold; }
-    .subtitle3 { color: #94a3b8; font-size: 1.30rem; margin-bottom: 25px; text-align: center; font-style: italic; }
+    .subtitle { color: #94a3b8; font-size: 1.20rem; margin-bottom: 20px; text-align: center; }
+    .subtitle1 { color: #94a3b8; font-size: 1.20rem; margin-bottom: 20px; text-align: center; }
+    .subtitle2 { color: #cbd5e1; font-size: 1.40rem; margin-bottom: 20px; text-align: center; font-weight: bold; }
+    .subtitle3 { color: #94a3b8; font-size: 1.30rem; margin-bottom: 20px; text-align: center; font-style: italic; }
     .control { background: #1e2937; padding: 20px; border-radius: 16px; margin-bottom: 25px; text-align: center; }
     select, button { padding: 12px 24px; font-size: 1.1rem; border-radius: 12px; margin: 8px; }
     button { background: #22c55e; color: black; font-weight: bold; cursor: pointer; }
@@ -97,7 +97,6 @@
   </div>
 
   <script>
-    // === GANTI DENGAN KONFIGURASI FIREBASE KAMU ===
     const firebaseConfig = {
       apiKey: "AIzaSyBTe7LITbfra1GB-lnvvrKXS1_GNU86hCQ",
       databaseURL: "https://iot-moment-of-inertia-timer-default-rtdb.asia-southeast1.firebasedatabase.app",
@@ -138,9 +137,9 @@
 
       document.getElementById('waktu').textContent = (data.t || 0).toFixed(5) + " s";
       document.getElementById('kecepatan').textContent = (data.v || 0).toFixed(5) + " m/s";
-      document.getElementById('i_eks').textContent = (data.i_eks || 0).toFixed(8) + " kg·m²";
-      document.getElementById('i_teo').textContent = (data.i_teo || 0).toFixed(8) + " kg·m²";
-      document.getElementById('error').textContent = (data.error || 0).toFixed(8) + " %";
+      document.getElementById('i_eks').textContent = (data.i_eks || 0).toFixed(6) + " kg·m²";
+      document.getElementById('i_teo').textContent = (data.i_teo || 0).toFixed(6) + " kg·m²";
+      document.getElementById('error').textContent = (data.error || 0).toFixed(2) + " %";
 
       const label = new Date().toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'});
 
