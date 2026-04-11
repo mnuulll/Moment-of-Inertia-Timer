@@ -21,7 +21,6 @@
     select, button { padding: 12px 24px; font-size: 1.1rem; border-radius: 12px; margin: 8px; }
     button { background: #22c55e; color: black; font-weight: bold; cursor: pointer; }
     button:hover { background: #16a34a; }
-    .info { background: #1e2937; padding: 12px; border-radius: 12px; margin-bottom: 20px; text-align: center; font-size: 1rem; }
     .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-bottom: 30px; }
     .card { background: #1e2937; padding: 20px; border-radius: 16px; text-align: center; }
     .card h3 { margin: 0 0 8px 0; color: #94a3b8; }
@@ -39,7 +38,7 @@
       <div>
         <h1>IoT Moment of Inertia Timer</h1>
         <p class="subtitle">Kelompok 10</p>
-        <p class="subtitle1">Fisika TL Kelas 11 25/26</p>
+        <p class="subtitle1">Fisika Kelas 11 25/26</p>
         <p class="subtitle2">Pengajar: Bpk. Agus Salim, S.Si, M.Pd</p>
         <p class="subtitle3">"Physics is the language, Engineering is the story"</p>
       </div>
@@ -58,11 +57,6 @@
       <button onclick="kirimPilihan()">Pilih Jenis Benda</button>
       <button onclick="mulaiProgram()" style="background:#2323ff;">▶ Mulai Program</button>
       <button onclick="resetESP()" style="background:#ef4444;">🔄 Reset Alat</button>
-    </div>
-
-     <!-- Info Massa & Radius -->
-    <div class="info" id="infoBenda">
-      <strong>Silinder Padat</strong> → m = 0.048 kg, r = 0.0135 m
     </div>
 
     <div class="cards">
@@ -136,14 +130,6 @@
       db.ref('control/reset').set(1);
       speak("Alat sedang direset");
     }
-
-    function updateInfoBenda(jenis) {
-      const info = document.getElementById('infoBenda');
-      if (jenis == 0) {
-        info.innerHTML = `<strong>Silinder Padat</strong> → m = 0.048 kg, r = 0.024 m`;
-      } else {
-        info.innerHTML = `<strong>Bola Padat</strong> → m = 0.021 kg, r = 0.025 m`;
-      }
 
     function updateData(snapshot) {
       const data = snapshot.val();
