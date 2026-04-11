@@ -198,10 +198,10 @@
     }
 
     function initCharts() {
-      chartWaktu = new Chart(document.getElementById('chartWaktu'), { type: 'line', data: { labels: [], datasets: [{ borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
-      chartKecepatan = new Chart(document.getElementById('chartKecepatan'), { type: 'line', data: { labels: [], datasets: [{ borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
-      chartIEks = new Chart(document.getElementById('chartIEks'), { type: 'line', data: { labels: [], datasets: [{ borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
-      chartITeo = new Chart(document.getElementById('chartITeo'), { type: 'line', data: { labels: [], datasets: [{ borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
+      chartWaktu = new Chart(document.getElementById('chartWaktu'), { type: 'line', data: { labels: [waktu (s)], datasets: [{ borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
+      chartKecepatan = new Chart(document.getElementById('chartKecepatan'), { type: 'line', data: { labels: [kecepatan (m/s)], datasets: [{ borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
+      chartIEks = new Chart(document.getElementById('chartIEks'), { type: 'line', data: { labels: [I Eksperimen], datasets: [{ borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
+      chartITeo = new Chart(document.getElementById('chartITeo'), { type: 'line', data: { labels: [I Teoretis], datasets: [{ borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
     }
 
     window.onload = () => {
