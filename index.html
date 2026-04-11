@@ -27,7 +27,6 @@
     .card h3 { margin: 0 0 8px 0; color: white; }
     .card p { font-size: 2rem; margin: 0; font-weight: 600; }
     .chart-container { background: #1e2937; padding: 20px; border-radius: 16px; margin-bottom: 25px; }
-    .legend { text-align: center; margin-top: 8px; font-size: 1.1rem; }
     .credit { text-align: center; margin-top: 60px; color: #64748b; font-size: 1.1rem; line-height: 1.6; }
     .description { text-align: center; color: #cbd5e1; font-size: 1rem; margin-bottom: 30px; max-width: 800px; margin-left: auto; margin-right: auto; }
   </style>
@@ -198,10 +197,10 @@
     }
 
     function initCharts() {
-      chartWaktu = new Chart(document.getElementById('chartWaktu'), { type: 'line', data: { labels: [waktu (s)], datasets: [{ borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
-      chartKecepatan = new Chart(document.getElementById('chartKecepatan'), { type: 'line', data: { labels: [kecepatan (m/s)], datasets: [{ borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
-      chartIEks = new Chart(document.getElementById('chartIEks'), { type: 'line', data: { labels: [I Eksperimen], datasets: [{ borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
-      chartITeo = new Chart(document.getElementById('chartITeo'), { type: 'line', data: { labels: [I Teoretis], datasets: [{ borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
+      chartWaktu = new Chart(document.getElementById('chartWaktu'), { type: 'line', data: { labels: [], datasets: [{ borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
+      chartKecepatan = new Chart(document.getElementById('chartKecepatan'), { type: 'line', data: { labels: [], datasets: [{ borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
+      chartIEks = new Chart(document.getElementById('chartIEks'), { type: 'line', data: { labels: [], datasets: [{ borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
+      chartITeo = new Chart(document.getElementById('chartITeo'), { type: 'line', data: { labels: [], datasets: [{ borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
     }
 
     window.onload = () => {
