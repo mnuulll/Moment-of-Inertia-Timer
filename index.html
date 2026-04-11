@@ -63,12 +63,12 @@
       <div style="display:flex; justify-content:center; gap:80px; flex-wrap:wrap; color: white">
         <div>
           <strong style="font-size:1.25rem;">Silinder Pejal</strong><br><br>
-          m = 0.048 kg<br>
+          m = 0.018 kg<br>
           r = 0.012 m
         </div>
         <div>
           <strong style="font-size:1.25rem;">Bola Pejal</strong><br><br>
-          m = 0.021 kg<br>
+          m = 0.02008 kg<br>
           r = 0.0123 m
         </div>
       </div>
@@ -76,9 +76,9 @@
 
     <div class="cards">
       <div class="card"><h3>Waktu</h3><p id="waktu">0.00000 s</p></div>
-      <div class="card"><h3>Kecepatan</h3><p id="kecepatan">0.000 m/s</p></div>
-      <div class="card"><h3>I Eksperimen</h3><p id="i_eks">0.000000 kg·m²</p></div>
-      <div class="card"><h3>I Teoretis</h3><p id="i_teo">0.000000 kg·m²</p></div>
+      <div class="card"><h3>Kecepatan</h3><p id="kecepatan">0.00000 m/s</p></div>
+      <div class="card"><h3>I Eksperimen</h3><p id="i_eks">0.0000000 kg·m²</p></div>
+      <div class="card"><h3>I Teoretis</h3><p id="i_teo">0.0000000 kg·m²</p></div>
       <div class="card"><h3>Error</h3><p id="error">0.00 %</p></div>
     </div>
 
@@ -152,8 +152,8 @@
 
       document.getElementById('waktu').textContent = (data.t || 0).toFixed(5) + " s";
       document.getElementById('kecepatan').textContent = (data.v || 0).toFixed(5) + " m/s";
-      document.getElementById('i_eks').textContent = (data.i_eks || 0).toFixed(6) + " kg·m²";
-      document.getElementById('i_teo').textContent = (data.i_teo || 0).toFixed(6) + " kg·m²";
+      document.getElementById('i_eks').textContent = (data.i_eks || 0).toFixed(7) + " kg·m²";
+      document.getElementById('i_teo').textContent = (data.i_teo || 0).toFixed(7) + " kg·m²";
       document.getElementById('error').textContent = (data.error || 0).toFixed(2) + " %";
 
       const label = new Date().toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'});
