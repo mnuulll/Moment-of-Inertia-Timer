@@ -27,8 +27,8 @@
     .card h3 { margin: 0 0 8px 0; color: white; }
     .card p { font-size: 2rem; margin: 0; font-weight: 600; }
     .chart-container { background: #1e2937; padding: 20px; border-radius: 16px; margin-bottom: 25px; }
-    .legend { text-align: center; margin-top: 8px; font-size: 1rem; }
-    .credit { text-align: center; margin-top: 60px; color: #64748b; font-size: 0.95rem; line-height: 1.6; }
+    .legend { text-align: center; margin-top: 8px; font-size: 1.1rem; }
+    .credit { text-align: center; margin-top: 60px; color: #64748b; font-size: 1.1rem; line-height: 1.6; }
     .description { text-align: center; color: #cbd5e1; font-size: 1.1rem; margin-bottom: 30px; max-width: 800px; margin-left: auto; margin-right: auto; }
   </style>
 </head>
@@ -61,14 +61,14 @@
 
     <div style="background:#1e2937; padding:18px; border-radius:16px; margin-bottom:25px; text-align:center;">
       <h3 style="margin:0 0 15px 0; color:white; text-decoration: underline;">Parameter Benda</h3>
-      <div style="display:flex; justify-content:center; gap:80px; flex-wrap:wrap;">
+      <div style="display:flex; justify-content:center; gap:80px; flex-wrap:wrap; color: white">
         <div>
-          <strong style="font-size:1.25rem; color: white;">Silinder Pejal</strong><br><br>
+          <strong style="font-size:1.25rem;">Silinder Pejal</strong><br><br>
           m = 0.048 kg<br>
           r = 0.012 m
         </div>
         <div>
-          <strong style="font-size:1.25rem; color: white;">Bola Pejal</strong><br><br>
+          <strong style="font-size:1.25rem;">Bola Pejal</strong><br><br>
           m = 0.021 kg<br>
           r = 0.0125 m
         </div>
@@ -198,10 +198,10 @@
     }
 
     function initCharts() {
-      chartWaktu = new Chart(document.getElementById('chartWaktu'), { type: 'line', data: { labels: [], datasets: [{ label: 'Waktu (s)', borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
-      chartKecepatan = new Chart(document.getElementById('chartKecepatan'), { type: 'line', data: { labels: [], datasets: [{ label: 'Kecepatan (m/s)', borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
-      chartIEks = new Chart(document.getElementById('chartIEks'), { type: 'line', data: { labels: [], datasets: [{ label: 'I Eksperimen', borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
-      chartITeo = new Chart(document.getElementById('chartITeo'), { type: 'line', data: { labels: [], datasets: [{ label: 'I Teoretis', borderColor: '#ef4444', data: [] }] }, options: { responsive: true } });
+      chartWaktu = new Chart(document.getElementById('chartWaktu'), { type: 'line', data: { labels: [], datasets: [{ borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
+      chartKecepatan = new Chart(document.getElementById('chartKecepatan'), { type: 'line', data: { labels: [], datasets: [{ borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
+      chartIEks = new Chart(document.getElementById('chartIEks'), { type: 'line', data: { labels: [], datasets: [{ borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
+      chartITeo = new Chart(document.getElementById('chartITeo'), { type: 'line', data: { labels: [], datasets: [{ borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
     }
 
     window.onload = () => {
