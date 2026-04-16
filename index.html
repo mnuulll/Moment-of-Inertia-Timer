@@ -49,9 +49,18 @@
     <p class="description">Alat ini digunakan untuk mengukur waktu gelinding benda dan menghitung momen inersia secara digital menggunakan sensor LDR dan ESP32.</p>
     <p class="description1">Inersia atau Kelembaman adalah ukuran ketahanan suatu benda terhadap gerak rotasinya. Artinya semakin besar nilai momen inersia, maka semakin sulit benda tersebut dirotasikan atau dihentikan.</p>
     <p class="description1">Rumus Inersia Eksperimen:</p>
-    <div style="text-align: center; margin-bottom: 30px;">
-      <img src="https://codecogs.com?\color{white}I_{eksperimen}=\frac{2m(gh-0.5v^2)r^2}{v^2}" title="Rumus Inersia" style="max-width:100%; height:auto;">
+    <!-- Rumus versi HTML & CSS (Anti Error) -->
+    <div style="display: flex; align-items: center; justify-content: center; font-family: 'serif'; font-size: 1.5rem; color: white; margin: 25px 0;">
+  <span style="margin-right: 10px;">I<sub>eksperimen</sub> =</span>
+  
+  <div style="display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle;">
+    <div style="border-bottom: 2px solid white; padding: 0 10px; padding-bottom: 3px;">
+     2m(gh - 0,5v<sup>2</sup>)r<sup>2</sup>
     </div>
+    <div style="padding-top: 3px;">v<sup>2</sup>
+    </div>
+  </div>
+
 
 
     <div class="control">
@@ -66,7 +75,7 @@
     </div>
 
     <div style="background:#1e2937; padding:10px; border-radius:16px; margin-bottom:25px; text-align:center;">
-      <h3 style="margin:0 0 15px 0; color:white; text-decoration: underline;">Parameter Benda</h3>
+      <h3 style="margin:0 0 15px 0; color:white; text-decoration: underline;">Parameter Eksperimen</h3>
       <div style="display:flex; justify-content:center; gap:80px; flex-wrap:wrap; color: white">
         <div>
           <strong style="font-size:1.25rem;">Silinder Pejal</strong><br><br>
