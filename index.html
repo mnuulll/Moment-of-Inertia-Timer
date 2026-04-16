@@ -191,24 +191,20 @@
       // Perbandingan I Eksperimen vs I Teoretis
       if (iEks > iTeo) {
         html += `• Nilai I Eksperimen <strong>lebih besar</strong> daripada I Teoretis.<br>`;
-        html += `  Kemungkinan penyebab: gesekan udara dan gesekan ramp yang tidak dihitung, sehingga energi hilang dan I eksperimen terbaca lebih besar.<br><br>`;
+        html += `  Kemungkinan penyebab: Adanya gaya hambat tambahan seperti gesekan pada poros atau slip saat benda meluncur yang meningkatkan nilai kelembaman terukur.<br><br>`;
       } else if (iEks < iTeo) {
         html += `• Nilai I Eksperimen <strong>lebih kecil</strong> daripada I Teoretis.<br>`;
-        html += `  Kemungkinan penyebab: slip kecil pada saat gelinding atau pengukuran waktu yang terlalu cepat.<br><br>`;
-      } else {
-        html += `• Nilai I Eksperimen hampir sama dengan I Teoretis.<br><br>`;
+        html += `  Kemungkinan penyebab: Dorongan awal saat pelepasan terlalu cepat atau pembacaan sensor yang terlalu dini.`;<br><br>`;
       }
 
       // Analisis Error
       if (error > 100) {
         html += `• Persentase error sangat tinggi (>100%).<br>`;
         html += `  Penyebab utama: kesalahan pengukuran waktu yang sangat besar, sensor tidak tepat mendeteksi, atau benda slip saat gelinding.<br><br>`;
-      } else if (error > 30) {
+      } else if (error < 100) {
         html += `• Persentase error cukup besar (${error.toFixed(2)}%).<br>`;
         html += `  Penyebab: gesekan ramp, udara, atau ketidaktepatan posisi photogate.<br><br>`;
-      } else {
-        html += `• Persentase error kecil (${error.toFixed(2)}%). Hasil eksperimen cukup akurat.<br><br>`;
-      }
+      } 
 
       html += `<strong>Kesimpulan Umum:</strong><br>`;
       html += `Percobaan ini membuktikan bahwa momen inersia bergantung pada bentuk dan distribusi massa benda. Nilai I bola lebih kecil daripada I silinder karena massa lebih dekat ke sumbu putar.`;
