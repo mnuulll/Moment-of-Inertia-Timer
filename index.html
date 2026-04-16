@@ -7,8 +7,6 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
-  <script src="https://polyfill.io"></script>
-  <script id="MathJax-script" async src="https://jsdelivr.net"></script>
   <style>
     body {font-family: sans-serif; background: #0f172a; color: #e2e8f0; margin: 0; padding: 20px; }
     .container { max-width: 1200px; margin: auto; }
@@ -51,7 +49,10 @@
     <p class="description">Alat ini digunakan untuk mengukur waktu gelinding benda dan menghitung momen inersia secara digital menggunakan sensor LDR dan ESP32.</p>
     <p class="description1">Inersia atau Kelembaman adalah ukuran ketahanan suatu benda terhadap gerak rotasinya. Artinya semakin besar nilai momen inersia, maka semakin sulit benda tersebut dirotasikan atau dihentikan.</p>
     <p class="description1">Rumus Inersia Eksperimen:</p>
-    <p $$I_{\text{eksperimen}} = \frac{2m(gh - 0,5v^2)r^2}{v^2}$$</p>
+    <div style="text-align: center; margin-bottom: 30px;">
+      <img src="https://codecogs.com?\color[RGB]{203,229,225}I_{eksperimen}=\frac{2m(gh-0,5v^2)r^2}{v^2}" title="Rumus Inersia" />
+    </div>
+
 
     <div class="control">
       <h2>Pilih Jenis Benda</h2>
@@ -79,7 +80,7 @@
         </div>
       </div>
       <h4 style="font-size:1.25rem; color:white;">s = 0,5m</h4>
-      <h5 style="font-size:1.25rem; color:white; &theta;"> = 5,5°</h5>
+      <h5 style="font-size:1.25rem; color:white;">\(\theta \) = 5,5°</h5>
       <h6 style="font-size:1.25rem; color:white;">g = 9,81m/s<sup>2</sup></h6>
     </div>
 
