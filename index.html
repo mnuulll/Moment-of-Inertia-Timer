@@ -7,6 +7,8 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+  <script src="https://polyfill.io"></script>
+  <script id="MathJax-script" async src="https://jsdelivr.net"></script>
   <style>
     body {font-family: sans-serif; background: #0f172a; color: #e2e8f0; margin: 0; padding: 20px; }
     .container { max-width: 1200px; margin: auto; }
@@ -48,6 +50,8 @@
 
     <p class="description">Alat ini digunakan untuk mengukur waktu gelinding benda dan menghitung momen inersia secara digital menggunakan sensor LDR dan ESP32.</p>
     <p class="description1">Inersia atau Kelembaman adalah ukuran ketahanan suatu benda terhadap gerak rotasinya. Artinya semakin besar nilai momen inersia, maka semakin sulit benda tersebut dirotasikan atau dihentikan.</p>
+    <p class="description1">Rumus Inersia Eksperimen:</p>
+    <p $$I_{\text{eksperimen}} = \frac{2m(gh - 0,5v^2)r^2}{v^2}$$</p>
 
     <div class="control">
       <h2>Pilih Jenis Benda</h2>
@@ -60,7 +64,7 @@
       <button onclick="resetESP()" style="background:#ef4444;">🔄 Reset Alat</button>
     </div>
 
-    <div style="background:#1e2937; padding:18px; border-radius:16px; margin-bottom:10px; text-align:center;">
+    <div style="background:#1e2937; padding:10px; border-radius:16px; margin-bottom:25px; text-align:center;">
       <h3 style="margin:0 0 15px 0; color:white; text-decoration: underline;">Parameter Benda</h3>
       <div style="display:flex; justify-content:center; gap:80px; flex-wrap:wrap; color: white">
         <div>
