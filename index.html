@@ -31,25 +31,77 @@
     .credit { text-align: center; margin-top: 60px; color: #64748b; font-size: 0.95rem; line-height: 1.6; }
     .description { text-align: center; color: #cbd5e1; font-size: 1rem; margin-bottom: 30px; max-width: 800px; margin-left: auto; margin-right: auto; }
     .description1 { text-align: center; color: #cbd5e1; font-size: 1.2rem; margin-bottom: 30px; max-width: 800px; margin-left: auto; margin-right: auto; }
+    /* Navigasi CSS */
+nav {
+    background: #1e2937;
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 2px solid #3b82f6;
+    margin-bottom: 20px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li a {
+    color: #e2e8f0;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+nav ul li a:hover {
+    color: #22c55e;
+}
+
+/* Sembunyikan section secara default */
+.page-section {
+    display: none;
+}
+
+/* Section yang aktif akan muncul */
+.active-section {
+    display: block;
+}
+
   </style>
 </head>
 <body>
+  <nav>
+    <ul>
+        <li><a onclick="showPage('home')">Home</a></li>
+        <li><a onclick="showPage('materi')">Materi</a></li>
+        <li><a onclick="showPage('percobaan')">Percobaan</a></li>
+        <li><a onclick="showPage('credit')">Credit</a></li>
+    </ul>
+</nav>
   <div class="container">
-    <div class="header">
-      <img src="https://mnuulll.github.io/Moment-of-Inertia-Timer/logo-sman1.png" alt="Logo SMAN 1 Gegesik" class="logo-left">
-      <div class="title-center">
-        <h1>IoT Moment of Inertia Timer</h1>
-        <p class="subtitle">Kelompok 10</p>
-        <p class="subtitle">Fisika Kelas 11 25/26</p>
-      </div>
-      <img src="https://mnuulll.github.io/Moment-of-Inertia-Timer/logo-project.png" alt="Logo Project" class="logo-right">
+    <div id="home" class="page-section active-section">
+        <div class="header">
+            <img src="https://github.io" class="logo-left">
+            <div class="title-center">
+                <h1>IoT Moment of Inertia Timer</h1>
+                <p class="subtitle">Kelompok 10 - Fisika Kelas 11 25/26</p>
+            </div>
+            <img src="https://github.io" class="logo-right">
+        </div>
+        <p class="description">Alat ini digunakan untuk mengukur waktu gelinding benda dan menghitung momen inersia secara digital menggunakan sensor LDR dan ESP32.</p>
+        <div class="subtitle3">"Physics is the language, Engineering is the story"</div>
     </div>
-    <div class="subtitle2">Pengajar: Bpk. Agus Salim, S.Si, M.Pd
-    <div class="subtitle3">"Physics is the language, Engineering is the story"
-      
-    <p class="description">Alat ini digunakan untuk mengukur waktu gelinding benda dan menghitung momen inersia secara digital menggunakan sensor LDR dan ESP32.</p>
-    <p class="description1">Inersia atau Kelembaman adalah ukuran ketahanan suatu benda terhadap gerak rotasinya. Artinya semakin besar nilai momen inersia, maka semakin sulit benda tersebut dirotasikan atau dihentikan.</p>
-      
+    <div id="materi" class="page-section">
+        <h2 style="text-align:center">Materi Dasar</h2>
+        <p class="description1">Inersia atau Kelembaman adalah ukuran ketahanan suatu benda terhadap gerak rotasinya...</p>
+        <!-- Masukkan semua rumus I_eks, I_teo, v, h di sini -->
     <div style="text-align: center; margin: 25px 0; color: white; font-family: sans-serif; font-size: 1.1rem;">
       <p class="description4" style="margin-bottom: 10px;">Rumus Inersia Eksperimen:</p>
       <div style="display: inline-flex; align-items: center; margin-bottom: 20px;">
@@ -85,7 +137,9 @@
         </div>
       </div>
     </div>
+    </div>
 
+    <div id="percobaan" class="page-section">
     <div class="control">
       <h2>Pilih Jenis Benda</h2>
       <select id="jenisBenda">
@@ -150,12 +204,12 @@
         <p style="color:#94a3b8; text-align:center;">Menunggu data dari percobaan...</p>
       </div>
     </div>
-
-    <div class="credit">
-      <p>Credit by: Kelompok 10</p>
-      <p>Anggota: Mohammad Rizky Imanulhaq (Ketua), Denok Durrotun Nashah, Dita Rosdiyana, Eris Setiyawan, Gilang Haikal Rizkyan</p>
-      <p>Desainer: Mohammad Rizky Imanulhaq</p>
-      <p>Tugas Proyek Fisika Dinamika</p>
+</div>
+    <div id="credit" class="page-section">
+        <div class="credit">
+            <h3>Tim Penyusun</h3>
+            <p>Mohammad Rizky Imanulhaq (Ketua), Denok Durrotun Nashah, Dita Rosdiyana, Eris Setiyawan, Gilang Haikal Rizkyan</p>
+        </div>
     </div>
   </div>
 
