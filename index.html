@@ -128,6 +128,13 @@
       <canvas id="chartITeo" height="140"></canvas>
     </div>
 
+    <div class="chart-container" style="background:#1e2937; padding:25px; border-radius:16px;">
+      <h2 style="text-align:center; margin-bottom:20px;">Analisis Percobaan</h2>
+      <div id="kesimpulan" style="line-height:1.7; font-size:1.05rem;">
+        <p style="color:#94a3b8; text-align:center;">Menunggu data dari percobaan...</p>
+      </div>
+    </div>
+
     <div class="credit">
       <p>Credit by: Kelompok 10</p>
       <p>Anggota: Mohammad Rizky Imanulhaq (Ketua), Denok Durrotun Nashah, Dita Rosdiyana, Eris Setiyawan, Gilang Haikal Rizkyan</p>
@@ -170,6 +177,38 @@
       db.ref('control/reset').set(1);
       speak("Alat sedang direset");
     }
+
+    function tampilkanKesimpulan(data) {
+      const iEks = parseFloat(data.i_eks || 0);
+      const iTeo = parseFloat(data.i_teo || 0);
+      const error = parseFloat(data.error || 0);
+      const jenis = parseInt(data.jenisBenda || 0);
+
+      if (iEks > iTeo) {
+        html += `• Nilai I Eksperimen <strong>lebih besar</strong> daripada I Teoretis.<br>`;
+        html += `  Kemungkinan penyebab: gesekan udara dan gesekan ramp yang tidak dihitung, sehingga energi hilang dan I eksperimen terbaca lebih besar.<br><br>`;
+      } else if (iEks < iTeo) {
+        html += `• Nilai I Eksperimen <strong>lebih kecil</strong> daripada I Teoretis.<br>`;
+        html += `  Kemungkinan penyebab: slip kecil pada saat gelinding atau pengukuran waktu yang terlalu cepat.<br><br>`;
+      } else {
+        html += `• Nilai I Eksperimen hampir sama dengan I Teoretis.<br><br>`;
+      }
+
+      if (error > 100) {
+        html += `• Persentase error sangat tinggi (>100%).<br>`;
+        html += `  Penyebab utama: kesalahan pengukuran waktu yang sangat besar, sensor tidak tepat mendeteksi, atau benda slip saat gelinding.<br><br>`;
+      } else if (error > 30) {
+        html += `• Persentase error cukup besar (${error.toFixed(2)}%).<br>`;
+        html += `  Penyebab: gesekan ramp, udara, atau ketidaktepatan posisi photogate.<br><br>`;
+      } else {
+        html += `• Persentase error kecil (${error.toFixed(2)}%). Hasil eksperimen cukup akurat.<br><br>`;
+      }
+
+      html += `<strong>Kesimpulan Umum:</strong><br>`;
+      html += `Percobaan ini membuktikan bahwa momen inersia bergantung pada bentuk dan distribusi massa benda. Nilai I bola lebih kecil daripada I silinder karena massa lebih dekat ke sumbu putar.`;
+
+      document.getElementById('kesimpulan').innerHTML = html;
+    }
     
     function updateData(snapshot) {
       const data = snapshot.val();
@@ -180,6 +219,8 @@
       document.getElementById('i_eks').textContent = (data.i_eks || 0).toFixed(7) + " kg·m²";
       document.getElementById('i_teo').textContent = (data.i_teo || 0).toFixed(7) + " kg·m²";
       document.getElementById('error').textContent = (data.error || 0).toFixed(2) + " %";
+
+      tampilkanKesimpulan(data);
       
       const label = new Date().toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'});
 
