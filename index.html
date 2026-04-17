@@ -184,6 +184,8 @@
       const error = parseFloat(data.error || 0);
       const jenis = parseInt(data.jenisBenda || 0);
 
+      let html = `<strong>Analisis Percobaan:</strong><br><br>`;
+
       if (iEks > iTeo) {
         html += `• Nilai I Eksperimen <strong>lebih besar</strong> daripada I Teoretis.<br>`;
         html += `  Kemungkinan penyebab: gesekan udara dan gesekan ramp yang tidak dihitung, sehingga energi hilang dan I eksperimen terbaca lebih besar.<br><br>`;
