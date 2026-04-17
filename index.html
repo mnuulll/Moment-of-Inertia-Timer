@@ -27,7 +27,7 @@
     .card { background: #1e2937; padding: 20px; border-radius: 16px; text-align: center; }
     .card h3 { margin: 0 0 8px 0; color: white; }
     .card p { font-size: 2rem; margin: 0; font-weight: 600; }
-    .chart-container { background: #1e2937; padding: 20px; border-radius: 16px; margin-bottom: 25px; }
+    .chart-container { background: #1e2937; padding: 20px; border-radius: 16px; margin-bottom: 25px; text-align: center; }
     .credit { color: #cbd5e1; font-size: 1.5rem; text-align: center; font-weight: bold; }
     .description { text-align: center; color: #cbd5e1; font-size: 1.5rem; margin-bottom: 30px; max-width: 800px; margin-left: auto; margin-right: auto; }
     .description1 { text-align: center; color: #cbd5e1; font-size: 1.2rem; margin-bottom: 30px; max-width: 800px; margin-left: auto; margin-right: auto; }
@@ -240,15 +240,13 @@
 
   <script>
     function showPage(pageId) {
-        // Sembunyikan semua section
+
         document.querySelectorAll('.page-section').forEach(section => {
             section.classList.remove('active');
         });
 
-    // Tampilkan section yang diklik
         document.getElementById(pageId).classList.add('active');
 
-    // Jika grafik ada di halaman yang dibuka, paksa resize agar tidak gepeng
         if(pageId === 'percobaan') {
             window.dispatchEvent(new Event('resize'));
         }
