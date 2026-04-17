@@ -31,77 +31,66 @@
     .credit { text-align: center; margin-top: 60px; color: #64748b; font-size: 0.95rem; line-height: 1.6; }
     .description { text-align: center; color: #cbd5e1; font-size: 1rem; margin-bottom: 30px; max-width: 800px; margin-left: auto; margin-right: auto; }
     .description1 { text-align: center; color: #cbd5e1; font-size: 1.2rem; margin-bottom: 30px; max-width: 800px; margin-left: auto; margin-right: auto; }
-    /* Container Menu di Kanan Atas */
-.menu-container {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 2000;
-}
-
-/* Tombol Titik Tiga / Hamburger */
-.menu-btn {
-    background: #3b82f6;
-    color: white;
-    border: none;
-    padding: 12px 15px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 1.5rem;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    transition: 0.3s;
-}
-
-.menu-btn:hover {
-    background: #2563eb;
-    transform: scale(1.1);
-}
-
-/* Kotak Pilihan Menu (Dropdown) */
-.menu-content {
-    display: none; /* Sembunyi secara default */
-    position: absolute;
-    right: 0;
-    top: 55px;
+    /* Navbar Berjejer */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 5%;
     background: #1e2937;
-    min-width: 180px;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.4);
-    overflow: hidden;
-    border: 1px solid #334155;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 2px solid #3b82f6;
 }
 
-.menu-content a {
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li a {
     color: white;
-    padding: 12px 16px;
     text-decoration: none;
-    display: block;
-    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
     transition: 0.3s;
 }
 
-.menu-content a:hover {
-    background: #334155;
+.nav-links li a:hover {
     color: #22c55e;
 }
 
-/* Class untuk memunculkan menu via JS */
-.show { display: block; }
+/* Animasi & Kontrol Tampilan */
+.page-section {
+    display: none; /* Sembunyi semua */
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.active {
+    display: block; /* Munculkan yang aktif */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
   </style>
 </head>
 <body>
-  <div class="menu-container">
-    <button class="menu-btn" onclick="toggleMenu()">☰</button> <!-- Bisa diganti ⋮ untuk titik tiga -->
-    <div id="myDropdown" class="menu-content">
-        <a onclick="showPage('home')">🏠 Home</a>
-        <a onclick="showPage('materi')">📚 Materi</a>
-        <a onclick="showPage('percobaan')">🚀 Percobaan</a>
-        <a onclick="showPage('credit')">👥 Credit</a>
-    </div>
-  </div>
+  <header>
+    <div style="font-weight:bold; color:#3b82f6;">IoT Project</div>
+    <ul class="nav-links">
+        <li><a onclick="showPage('home')">Home</a></li>
+        <li><a onclick="showPage('materi')">Materi</a></li>
+        <li><a onclick="showPage('percobaan')">Percobaan</a></li>
+        <li><a onclick="showPage('credit')">Credit</a></li>
+    </ul>
+</header>
   <div class="container">
-    <div id="home" class="page-section active-section">
+    <div id="home" class="page-section active">
     <div class="header">
       <img src="https://mnuulll.github.io/Moment-of-Inertia-Timer/logo-sman1.png" alt="Logo SMAN 1 Gegesik" class="logo-left">
       <div class="title-center">
@@ -115,8 +104,9 @@
     <div class="subtitle3">"Physics is the language, Engineering is the story"</div>
       
     <p class="description">Alat ini digunakan untuk mengukur waktu gelinding benda dan menghitung momen inersia secara digital menggunakan sensor LDR dan ESP32.</p>
-    </div>
-    <div id="materi" class="page-section">
+      </div>
+      
+      <div id="materi" class="page-section">
     <p class="description1">Inersia atau Kelembaman adalah ukuran ketahanan suatu benda terhadap gerak rotasinya. Artinya semakin besar nilai momen inersia, maka semakin sulit benda tersebut dirotasikan atau dihentikan.</p>
       
     <div style="text-align: center; margin: 25px 0; color: white; font-family: sans-serif; font-size: 1.1rem;">
@@ -154,9 +144,9 @@
         </div>
       </div>
     </div>
-    </div>
+        </div>
 
-    <div id="percobaan" class="page-section">
+  <div id="percobaan" class="page-section">
     <div class="control">
       <h2>Pilih Jenis Benda</h2>
       <select id="jenisBenda">
@@ -221,53 +211,35 @@
         <p style="color:#94a3b8; text-align:center;">Menunggu data dari percobaan...</p>
       </div>
     </div>
+      <canvas id="inertiaChart"></canvas>
     </div>
 
     <div id="credit" class="page-section">
-      <div class="credit">
-         <p>Credit by: Kelompok 10</p>
-         <p>Anggota: Mohammad Rizky Imanulhaq (Ketua), Denok Durrotun Nashah, Dita Rosdiyana, Eris Setiyawan, Gilang Haikal Rizkyan</p>
-         <p>Desainer: Mohammad Rizky Imanulhaq</p>
-         <p>Tugas Proyek Fisika Dinamika</p>
-      </div>
-   </div>
+    <div class="credit">
+      <p>Credit by: Kelompok 10</p>
+      <p>Anggota: Mohammad Rizky Imanulhaq (Ketua), Denok Durrotun Nashah, Dita Rosdiyana, Eris Setiyawan, Gilang Haikal Rizkyan</p>
+      <p>Desainer: Mohammad Rizky Imanulhaq</p>
+      <p>Tugas Proyek Fisika Dinamika</p>
+    </div>
+    </div>
   </div>
 
   <script>
-    /* Fungsi untuk buka-tutup dropdown */
-function toggleMenu() {
-    document.getElementById("myDropdown").classList.toggle("show");
-}
+    function showPage(pageId) {
+        // Sembunyikan semua section
+        document.querySelectorAll('.page-section').forEach(section => {
+            section.classList.remove('active');
+        });
 
-/* Fungsi pindah halaman (sama seperti sebelumnya) */
-function showPage(pageId) {
-    const sections = document.querySelectorAll('.page-section');
-    sections.forEach(section => {
-        section.style.display = 'none'; // Sembunyikan semua
-    });
+    // Tampilkan section yang diklik
+        document.getElementById(pageId).classList.add('active');
 
-    document.getElementById(pageId).style.display = 'block'; // Tampilkan yang dipilih
-    
-    // Tutup menu otomatis setelah klik
-    document.getElementById("myDropdown").classList.remove("show");
-    
-    speak("Buka halaman " + pageId);
-}
-
-// Menutup menu jika klik di luar area menu
-window.onclick = function(event) {
-    if (!event.target.matches('.menu-btn')) {
-        var dropdowns = document.getElementsByClassName("menu-content");
-        for (var i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
+    // Jika grafik ada di halaman yang dibuka, paksa resize agar tidak gepeng
+        if(pageId === 'percobaan') {
+            window.dispatchEvent(new Event('resize'));
         }
     }
-}
 
-    
     const firebaseConfig = {
       apiKey: "AIzaSyBTe7LITbfra1GB-lnvvrKXS1_GNU86hCQ",
       databaseURL: "https://iot-moment-of-inertia-timer-default-rtdb.asia-southeast1.firebasedatabase.app",
