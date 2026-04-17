@@ -102,6 +102,7 @@
           <img src="https://mnuulll.github.io/Moment-of-Inertia-Timer/logo-project.png" alt="Logo Project" class="logo-right">
         </div>
         <p class="description1">Inersia atau Kelembaman adalah ukuran ketahanan suatu benda terhadap gerak rotasinya. Artinya semakin besar nilai momen inersia, maka semakin sulit benda tersebut dirotasikan atau dihentikan.</p>
+        <p class="description1">Kemudian, semakin besar massa dan jari-jari benda maka semakin besar juga nilai momen inersianya.</p>
         <div class="img-container1">
           <img src="https://mnuulll.github.io/Moment-of-Inertia-Timer/inersia.gif" alt="simulasi inersia">
         </div>
@@ -380,7 +381,6 @@
     window.onload = () => {
       initCharts();
       db.ref('data').on('value', updateData);
-      setTimeout(() => speak("Pilihlah benda yang akan kamu gelindingkan"), 1000);
     };
   </script>
 </body>
