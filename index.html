@@ -129,7 +129,7 @@
     </div>
 
     <div class="chart-container" style="background:#1e2937; padding:25px; border-radius:16px;">
-      <h2 style="text-align:center; margin-bottom:20px;">Kesimpulan dan Analisis</h2>
+      <h2 style="text-align:center; margin-bottom:20px;">Analisis Percobaan</h2>
       
       <div id="kesimpulan" style="line-height:1.7; font-size:1.05rem;">
         <p style="color:#94a3b8; text-align:center;">Menunggu data dari percobaan...</p>
@@ -179,14 +179,11 @@
       speak("Alat sedang direset");
     }
 
-    // Fungsi untuk menampilkan kesimpulan otomatis
     function tampilkanKesimpulan(data) {
       const iEks = parseFloat(data.i_eks || 0);
       const iTeo = parseFloat(data.i_teo || 0);
       const error = parseFloat(data.error || 0);
       const jenis = parseInt(data.jenisBenda || 0);
-
-      let html = `<strong>Analisis Percobaan:</strong><br><br>`;
 
       if (iEks > iTeo) {
         html += `• Nilai I Eksperimen <strong>lebih besar</strong> daripada I Teoretis.<br>`;
