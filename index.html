@@ -247,7 +247,7 @@
             </div>
             <img src="https://mnuulll.github.io/Moment-of-Inertia-Timer/logo-project.png" alt="Logo Project" class="logo-right">
           </div>
-          <span class="credit-subtitle">Kelompok 10 - Proyek Fisika Dinamika</span>
+          <span class="credit-subtitle">Kelompok 10 - Fisika 25/26</span>
 
           <div class="team-grid">
             <div class="member-card" style="border-color: #fbbf24;">
@@ -387,6 +387,15 @@
       document.getElementById('i_eks').textContent = (data.i_eks || 0).toFixed(7) + " kg·m²";
       document.getElementById('i_teo').textContent = (data.i_teo || 0).toFixed(7) + " kg·m²";
       document.getElementById('error').textContent = (data.error || 0).toFixed(2) + " %";
+
+      let errorElement = document.getElementById('error'); // Ambil elemennya dulu
+      if (error > 100) {
+          errorElement.style.color = "#ff4d4d"; // Jadi Merah
+      } else if (error > 30) {
+          errorElement.style.color = "#38bdf8"; // Jadi Biru
+      } else {
+          errorElement.style.color = "#4ade80"; // Jadi Hijau
+      }
 
       tampilkanKesimpulan(data);
       
