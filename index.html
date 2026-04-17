@@ -69,11 +69,9 @@
         </div>
       </div>
     </div>
-    <!-- Bagian Rumus Lainnya -->
     <div style="text-align: center; margin: 25px 0; color: white; font-family: sans-serif; font-size: 1.1rem;">
       <p class="description4" style="margin-bottom: 10px;">Rumus Lainnya yang Digunakan:</p>
       <div style="display: flex; justify-content: center; gap: 50px; flex-wrap: wrap; align-items: center;">
-    <!-- Rumus Kecepatan -->
         <div style="display: inline-flex; align-items: center; font-size: 1.2rem;">
           <span style="font-style: italic; margin-right: 8px;">v =</span>
           <table style="display: inline-table; border-collapse: collapse; text-align: center; vertical-align: middle;">
@@ -81,8 +79,6 @@
             <tr><td style="padding-top: 5px;">t</td></tr>
           </table>
         </div>
-
-    <!-- Rumus Ketinggian -->
         <div style="font-size: 1.2rem; font-style: italic;">
           h = s &times; sin(&theta;)
         </div>
@@ -224,9 +220,6 @@
       } else {
         html += `• Persentase error kecil (${error.toFixed(2)}%). Hasil eksperimen cukup akurat.<br><br>`;
       }
-
-      html += `<strong>Kesimpulan Umum:</strong><br>`;
-      html += `Percobaan ini membuktikan bahwa momen inersia bergantung pada bentuk dan distribusi massa benda. Nilai I bola lebih kecil daripada I silinder karena massa lebih dekat ke sumbu putar.`;
 
       document.getElementById('kesimpulan').innerHTML = html;
     }
