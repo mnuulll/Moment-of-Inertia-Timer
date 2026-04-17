@@ -184,7 +184,7 @@
       const error = parseFloat(data.error || 0);
       const jenis = parseInt(data.jenisBenda || 0);
 
-      let html = `<strong>Analisis Percobaan:</strong><br><br>`;
+      let html = `<strong>Hasil:</strong><br><br>`;
 
       if (iEks > iTeo) {
         html += `• Nilai I Eksperimen <strong>lebih besar</strong> daripada I Teoretis.<br>`;
@@ -265,10 +265,10 @@
     }
 
     function initCharts() {
-      chartWaktu = new Chart(document.getElementById('chartWaktu'), { type: 'line', data: { labels: [], datasets: [{ borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
-      chartKecepatan = new Chart(document.getElementById('chartKecepatan'), { type: 'line', data: { labels: [], datasets: [{ borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
-      chartIEks = new Chart(document.getElementById('chartIEks'), { type: 'line', data: { labels: [], datasets: [{ borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
-      chartITeo = new Chart(document.getElementById('chartITeo'), { type: 'line', data: { labels: [], datasets: [{ borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
+      chartWaktu = new Chart(document.getElementById('chartWaktu'), { type: 'line', data: { labels: [], datasets: [{ label: 'Waktu (s)', borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
+      chartKecepatan = new Chart(document.getElementById('chartKecepatan'), { type: 'line', data: { labels: [], datasets: [{ label: 'Kecepatan (m/s)', borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
+      chartIEks = new Chart(document.getElementById('chartIEks'), { type: 'line', data: { labels: [], datasets: [{ label: 'I Eksperimen', borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
+      chartITeo = new Chart(document.getElementById('chartITeo'), { type: 'line', data: { labels: [], datasets: [{ label: 'I Teoretis', borderColor: '#3b82f6', data: [] }] }, options: { responsive: true } });
     }
 
     window.onload = () => {
