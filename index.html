@@ -389,13 +389,14 @@
       document.getElementById('error').textContent = (data.error || 0).toFixed(2) + " %";
 
       let errorElement = document.getElementById('error'); // Ambil elemennya dulu
-      if (error > 100) {
-          errorElement.style.color = "#ff4d4d"; // Jadi Merah
-      } else if (error > 30) {
-          errorElement.style.color = "#38bdf8"; // Jadi Biru
-      } else {
-          errorElement.style.color = "#4ade80"; // Jadi Hijau
-      }
+      let angkaError = parseFloat(errorElement.innerText);
+      if (angkaError > 100) {
+    errorElement.style.setProperty('color', '#ff4d4d', 'important'); // Merah
+} else if (angkaError > 30) {
+    errorElement.style.setProperty('color', '#38bdf8', 'important'); // Biru
+} else {
+    errorElement.style.setProperty('color', '#4ade80', 'important'); // Hijau
+}
 
       tampilkanKesimpulan(data);
       
