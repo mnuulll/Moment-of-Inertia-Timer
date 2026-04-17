@@ -31,18 +31,7 @@
     .credit { text-align: center; margin-top: 60px; color: #64748b; font-size: 0.95rem; line-height: 1.6; }
     .description { text-align: center; color: #cbd5e1; font-size: 1rem; margin-bottom: 30px; max-width: 800px; margin-left: auto; margin-right: auto; }
     .description1 { text-align: center; color: #cbd5e1; font-size: 1.2rem; margin-bottom: 30px; max-width: 800px; margin-left: auto; margin-right: auto; }
-    /* Navbar Berjejer */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 5%;
-    background: #1e2937;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    border-bottom: 2px solid #3b82f6;
-}
+    header { display: flex; justify-content: space-between; align-items: center; padding: 10px 5%; background: #1e2937; position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid #3b82f6; }
 
 .nav-links {
     list-style: none;
@@ -104,6 +93,23 @@ header {
     <div class="subtitle3">"Physics is the language, Engineering is the story"</div>
       
     <p class="description">Alat ini digunakan untuk mengukur waktu gelinding benda dan menghitung momen inersia secara digital menggunakan sensor LDR dan ESP32.</p>
+      <!-- Tambahkan ini di bawah teks deskripsi alat -->
+<div style="display: flex; justify-content: center; gap: 20px; margin-top: 30px;">
+    <div style="background: rgba(59, 130, 246, 0.1); padding: 20px; border-radius: 12px; border: 1px solid #3b82f6; width: 150px;">
+        <div style="font-size: 2rem;">⏱️</div>
+        <div style="font-weight: bold;">Real-Time</div>
+        <div style="font-size: 0.8rem; color: #94a3b8;">Data langsung masuk</div>
+    </div>
+    <div style="background: rgba(34, 197, 94, 0.1); padding: 20px; border-radius: 12px; border: 1px solid #22c55e; width: 150px;">
+        <div style="font-size: 2rem;">📊</div>
+        <div style="font-weight: bold;">Grafik</div>
+        <div style="font-size: 0.8rem; color: #94a3b8;">Analisis otomatis</div>
+    </div>
+</div>
+
+<button onclick="showPage('percobaan')" style="margin-top: 40px; padding: 15px 40px; background: linear-gradient(to right, #3b82f6, #2563eb); color: white; border: none; border-radius: 30px; font-weight: bold; cursor: pointer; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(59,130,246,0.4);">
+    Mulai Pengukuran 🚀
+</button>
       </div>
       
       <div id="materi" class="page-section">
