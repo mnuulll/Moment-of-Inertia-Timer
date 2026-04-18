@@ -81,72 +81,15 @@
     .object-column h3 { font-size: 1rem; margin-bottom: 10px }
     .object-column li, .constant-footer p { font-size: 0.9rem; margin-bottom: 8px; white-space: nowrap; }
     .parameter-card strong { width: 18px; font-size: 1rem; color: #fff; }}
-    .parameter-card {
-    background: rgba(15, 23, 42, 0.8); /* Warna gelap gambar atas */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    padding: 30px;
-    max-width: 600px;
-    margin: 20px auto;
-    font-family: 'Segoe UI', sans-serif;
-    color: white;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-
-/* Judul Utama Green */
-.parameter-title {
-    color: #22c55e; /* Hijau seperti gambar atas */
-    font-size: 1.5rem;
-    text-align: center;
-    margin-bottom: 25px;
-    text-decoration: none; /* Menghilangkan garis bawah agar lebih bersih */
-}
-
-/* Grid Perbandingan 2 Kolom */
-.comparison-grid {
-    display: flex;
-    justify-content: space-around;
-    gap: 20px;
-    margin-bottom: 20px;
-}
-
-.object-column h3 {
-    font-size: 1.2rem;
-    color: #fff;
-    margin-bottom: 15px;
-    text-align: center;
-}
-
-.object-column ul {
-    list-style: none;
-    padding: 0;
-}
-
-/* Gaya Teks Simbol (Bold White) */
-.parameter-card strong {
-    color: white;
-    font-size: 1.1rem;
-    display: inline-block;
-    width: 25px; /* Biar titik dua lurus */
-}
-
-.object-column li, .constant-footer p {
-    color: #cbd5e1; /* Warna abu-abu terang gambar atas */
-    font-size: 1rem;
-    margin-bottom: 10px;
-}
-
-/* Parameter Konstanta (Center) */
-.constant-footer {
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding-top: 20px;
-    text-align: center;
-}
-
-.constant-footer p {
-    margin: 5px 0;
-}
-
+    .parameter-card { background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 30px; max-width: 600px; margin: 20px auto; font-family: 'Segoe UI', sans-serif; color: white; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    .parameter-title { color: #22c55e; font-size: 1.5rem; text-align: center; margin-bottom: 25px; text-decoration: none; }
+    .comparison-grid { display: flex; justify-content: space-around; gap: 20px; margin-bottom: 20px; }
+    .object-column h3 { font-size: 1.2rem; color: #fff; margin-bottom: 15px; text-align: center; }
+    .object-column ul { list-style: none; padding: 0; }
+    .parameter-card strong { color: white; font-size: 1.1rem; display: inline-block; width: 25px; }
+    .object-column li, .constant-footer p { color: #cbd5e1; font-size: 1rem; margin-bottom: 10px; }
+    .constant-footer { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center; }
+    .constant-footer p { margin: 5px 0; }
 
   </style>
 </head>
@@ -288,54 +231,28 @@
         </div>
 
         <div class="parameter-card">
-    <h2 class="parameter-title">Parameter Eksperimen</h2>
-
-    <div class="comparison-grid">
-        <!-- Kolom Silinder -->
-        <div class="object-column">
-            <h3>Silinder Pejal</h3>
-            <ul>
+          <h2 class="parameter-title">Parameter Eksperimen</h2>
+          <div class="comparison-grid">
+            <div class="object-column">
+              <h3>Silinder Pejal</h3>
+              <ul>
                 <li><strong>m</strong> : 0.03128 kg</li>
                 <li><strong>r</strong> : 0.012 m</li>
-            </ul>
-        </div>
-
-        <!-- Kolom Bola -->
-        <div class="object-column">
-            <h3>Bola Pejal</h3>
-            <ul>
+              </ul>
+            </div>
+            <div class="object-column">
+              <h3>Bola Pejal</h3>
+              <ul>
                 <li><strong>m</strong> : 0.02008 kg</li>
                 <li><strong>r</strong> : 0.0123 m</li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- Parameter Konstanta di Tengah -->
-    <div class="constant-footer">
-        <p><strong>s</strong> : 0,5 m</p>
-        <p><strong>θ</strong> : 5,5°</p>
-        <p><strong>g</strong> : 9,81 m/s²</p>
-    </div>
-</div>
-
-        
-        <div style="background:#1e2937; padding:10px; border-radius:16px; margin-bottom:25px; text-align:center;">
-          <h3 style="margin:0 0 15px 0; color:white; text-decoration: underline; font-size:1.35rem;">Parameter Eksperimen</h3>
-          <div style="display:flex; justify-content:center; gap:80px; flex-wrap:wrap; color: white">
-            <div>
-              <strong style="font-size:1.25rem;">Silinder Pejal</strong><br><br>
-              <li><strong>m</strong> : 0.03128 kg</li>
-              <h4 style="font-size:1.15rem; color:white; margin: 5px 0;">r = 0.012 m</h4>
-            </div>
-            <div>
-              <strong style="font-size:1.25rem;">Bola Pejal</strong><br><br>
-              <li><strong>m</strong> : 0.02008 kg</li>
-              <h4 style="font-size:1.15rem; color:white; margin: 5px 0;">r = 0.0123 m</h4>
+              </ul>
             </div>
           </div>
-          <h4 style="font-size:1.15rem; color:white; margin: 5px 0;">s = 0,5m</h4>
-          <h5 style="font-size:1.15rem; color:white; margin: 5px 0;">&theta; = 5,5°</h5>
-          <h6 style="font-size:1.15rem; color:white; margin: 5px 0;">g = 9,81m/s<sup>2</sup></h6>
+          <div class="constant-footer">
+            <p><strong>s</strong> : 0,5 m</p>
+            <p><strong>θ</strong> : 5,5°</p>
+            <p><strong>g</strong> : 9,81 m/s²</p>
+          </div>
         </div>
 
         <div class="cards">
