@@ -355,11 +355,11 @@
     }
 
     // Header Tabel
-    let csvContent = "Percobaan Ke-,Waktu (s),Kecepatan (m/s),I Eksperimen (kgm2),I Teoretis (kgm2),Error (%)\n";
+    let csvContent = "Percobaan Ke-,Jenis Benda,Waktu (s),Kecepatan (m/s),I Eksperimen (kgm2),I Teoretis (kgm2),Error (%)\n";
 
     // Isi Tabel dengan perulangan (Looping)
     riwayatData.forEach((item, index) => {
-        csvContent += `${index + 1},${item.waktu},${item.kecepatan},${item.i_eks},${item.i_teo},${item.error}\n`;
+        csvContent += `${index + 1},${item.benda},${item.waktu},${item.kecepatan},${item.i_eks},${item.i_teo},${item.error}\n`;
     });
 
     // Proses Download
@@ -368,14 +368,12 @@
     const url = URL.createObjectURL(blob);
     
     link.setAttribute("href", url);
-    link.setAttribute("download", "riwayat_percobaan_kelompok10.csv");
+    link.setAttribute("download", "Data_Praktikum_Kelompok10.csv");
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
     
-
-    
-    speak("Data berhasil diunduh dalam format CSV");
+    speak("Data berhasil diunduh");
 }
 
 
@@ -430,7 +428,11 @@
     errorElement.style.setProperty('color', '#4ade80', 'important'); // Hijau
 }
 
+      let dropdown = document.getElementById("jenisBenda");
+// Ambil teks dari pilihan yang sedang dipilih (Silinder Pejal / Bola Pejal)
+let namaBenda = dropdown.options[dropdown.selectedIndex].text;
       riwayatData.push({
+        benda: namaBenda,
         waktu: data.t,
         kecepatan: data.v,
         i_eks: data.i_eks,
