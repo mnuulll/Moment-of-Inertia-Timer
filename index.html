@@ -71,19 +71,9 @@
     .grid-keterangan li { font-size: 0.95rem; color: #e2e8f0; margin-bottom: 10px; line-height: 1.4; }
     .grid-keterangan strong { color: white; font-family: 'Times New Roman', serif; font-size: 1.1rem; display: inline-block; width: 20px; }
     @media (max-width: 600px) {
-    .grid-keterangan {
-        grid-template-columns: 1fr; /* Berubah jadi 1 kolom di HP */
-        gap: 0;
-    }
-    
-    .keterangan-variabel {
-        padding: 15px;
-    }
-
-    .grid-keterangan li {
-        font-size: 0.85rem; /* Mengecilkan sedikit font di HP */
-    }
-}
+    .grid-keterangan { grid-template-columns: 1fr; gap: 0; }
+    .keterangan-variabel { padding: 15px; }
+    .grid-keterangan li { font-size: 0.85rem; } }
 
   </style>
 </head>
@@ -186,11 +176,12 @@
                 <li><strong>I</strong> : Momen Inersia (kg.m²)</li>
                 <li><strong>m</strong> : Massa Benda (kg)</li>
                 <li><strong>g</strong> : Gravitasi (9.8 m/s²)</li>
+                <li><strong>h</strong> : Ketinggian (m)</li>
                 <li><strong>v</strong> : Kecepatan (m/s)</li>
               </ul>
               <ul>
                 <li><strong>s</strong> : Jarak Lintasan (m)</li>
-                <li><strong>θ</strong> : Sudut Kemiringan (°)</li>
+                <li><strong>θ</strong> : Sudut Kemiringan RAMP (°)</li>
                 <li><strong>r</strong> : Jari-jari Benda (m)</li>
                 <li><strong>t</strong> : Waktu Tempuh (s)</li>
               </ul>
