@@ -325,6 +325,7 @@
 
     let chartWaktu, chartKecepatan, chartIEks, chartITeo;
     let lastEntryId = 0;
+    let riwayatData = [];
 
     function speak(text) {
       const utterance = new SpeechSynthesisUtterance(text);
@@ -348,22 +349,18 @@
       speak("Alat sedang direset");
     }
     function downloadCSV() {
-    // Ambil data terbaru dari elemen teks di layar
-    const data = {
-        waktu: document.getElementById('waktu').textContent,
-        kecepatan: document.getElementById('kecepatan').textContent,
-        i_eks: document.getElementById('i_eks').textContent,
-        i_teo: document.getElementById('i_teo').textContent,
-        error: document.getElementById('error').textContent
-    };
+    if (riwayatData.length === 0) {
+        speak("Belum ada data untuk diunduh");
+        return;
+    }
 
-    // Susun isi file CSV
-    let csvContent = "Parameter,Hasil\n";
-    csvContent += `Waktu,${data.waktu}\n`;
-    csvContent += `Kecepatan,${data.kecepatan}\n`;
-    csvContent += `I Eksperimen,${data.i_eks}\n`;
-    csvContent += `I Teoretis,${data.i_teo}\n`;
-    csvContent += `Error,${data.error}\n`;
+    // Header Tabel
+    let csvContent = "Percobaan Ke-,Waktu (s),Kecepatan (m/s),I Eksperimen (kgm2),I Teoretis (kgm2),Error (%)\n";
+
+    // Isi Tabel dengan perulangan (Looping)
+    riwayatData.forEach((item, index) => {
+        csvContent += `${index + 1},${item.waktu},${item.kecepatan},${item.i_eks},${item.i_teo},${item.error}\n`;
+    });
 
     // Proses Download
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
@@ -371,11 +368,14 @@
     const url = URL.createObjectURL(blob);
     
     link.setAttribute("href", url);
-    link.setAttribute("download", "hasil_percobaan_fisika.csv");
-    link.style.visibility = 'hidden';
+    link.setAttribute("download", "riwayat_percobaan_kelompok10.csv");
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    
+    speak("Seluruh riwayat percobaan berhasil diunduh");
+}
+
     
     speak("Data berhasil diunduh dalam format CSV");
 }
@@ -432,6 +432,14 @@
     errorElement.style.setProperty('color', '#4ade80', 'important'); // Hijau
 }
 
+      riwayatData.push({
+        waktu: data.t,
+        kecepatan: data.v,
+        i_eks: data.i_eks,
+        i_teo: data.i_teo,
+        error: data.error
+    });
+      
       tampilkanKesimpulan(data);
       
       const label = new Date().toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'});
