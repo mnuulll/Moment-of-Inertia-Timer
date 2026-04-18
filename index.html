@@ -64,12 +64,26 @@
     .member-card:nth-child(3) { animation-delay: 0.3s; }
     .member-card:nth-child(4) { animation-delay: 0.4s; }
     .member-card:nth-child(5) { animation-delay: 0.5s; }
-    .keterangan-wrapper { display: flex; justify-content: center; width: 100%; margin-top: 30px; }
-    .keterangan-variabel { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(5px); border: 1px solid rgba(255, 255, 255, 0.1); padding: 20px 40px; border-radius: 15px; min-width: 500px; text-align: center; }
-    .grid-keterangan { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; text-align: left; }
+    .keterangan-wrapper { display: flex; justify-content: center; width: 100%; margin-top: 30px; padding: 0 15px; box-sizing: border-box; }
+    .keterangan-variabel { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(5px); border: 1px solid rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 15px; width: 100%; max-width: 600px; text-align: center; }
+    .grid-keterangan { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: left; }
     .grid-keterangan ul { list-style: none; padding: 0; margin: 0; }
-    .grid-keterangan li { font-size: 0.95rem; color: #e2e8f0; margin-bottom: 8px; line-height: 1.5; }
-    .grid-keterangan strong { color: white; font-family: 'Times New Roman', serif; font-size: 1.1rem; }
+    .grid-keterangan li { font-size: 0.95rem; color: #e2e8f0; margin-bottom: 10px; line-height: 1.4; }
+    .grid-keterangan strong { color: white; font-family: 'Times New Roman', serif; font-size: 1.1rem; display: inline-block; width: 20px; }
+    @media (max-width: 600px) {
+    .grid-keterangan {
+        grid-template-columns: 1fr; /* Berubah jadi 1 kolom di HP */
+        gap: 0;
+    }
+    
+    .keterangan-variabel {
+        padding: 15px;
+    }
+
+    .grid-keterangan li {
+        font-size: 0.85rem; /* Mengecilkan sedikit font di HP */
+    }
+}
 
   </style>
 </head>
