@@ -303,15 +303,12 @@
   <script>
     let riwayatData = [];
     function showPage(pageId) {
-
-        document.querySelectorAll('.page-section').forEach(section => {
-            section.classList.remove('active');
+      document.querySelectorAll('.page-section').forEach(section => {
+        section.classList.remove('active');
         });
-
-        document.getElementById(pageId).classList.add('active');
-
+      document.getElementById(pageId).classList.add('active');
         if(pageId === 'percobaan') {
-            window.dispatchEvent(new Event('resize'));
+          window.dispatchEvent(new Event('resize'));
         }
     }
 
@@ -349,33 +346,29 @@
       speak("Alat sedang direset");
     }
     function downloadCSV() {
-    if (riwayatData.length === 0) {
+      if (riwayatData.length === 0) {
         speak("Belum ada data untuk diunduh");
         return;
-    }
+      }
 
-    // Header Tabel
-    let csvContent = "Percobaan Ke-,Jenis Benda,Waktu (s),Kecepatan (m/s),I Eksperimen (kgm2),I Teoretis (kgm2),Error (%)\n";
+      let csvContent = "Percobaan Ke-,Jenis Benda,Waktu (s),Kecepatan (m/s),I Eksperimen (kgm2),I Teoretis (kgm2),Error (%)\n";
 
-    // Isi Tabel dengan perulangan (Looping)
-    riwayatData.forEach((item, index) => {
+      riwayatData.forEach((item, index) => {
         csvContent += `${index + 1},${item.benda},${item.waktu},${item.kecepatan},${item.i_eks},${item.i_teo},${item.error}\n`;
-    });
+      });
 
-    // Proses Download
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement("a");
-    const url = URL.createObjectURL(blob);
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement("a");
+      const url = URL.createObjectURL(blob);
     
-    link.setAttribute("href", url);
-    link.setAttribute("download", "Data_Praktikum_Kelompok10.csv");
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+      link.setAttribute("href", url);
+      link.setAttribute("download", "Data_Praktikum_Kelompok10.csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     
-    speak("Data berhasil diunduh");
-}
-
+      speak("Data berhasil diunduh");
+    }
 
     function tampilkanKesimpulan(data) {
       const iEks = parseFloat(data.i_eks || 0);
@@ -418,19 +411,18 @@
       document.getElementById('i_teo').textContent = (data.i_teo || 0).toFixed(7) + " kg·m²";
       document.getElementById('error').textContent = (data.error || 0).toFixed(2) + " %";
 
-      let errorElement = document.getElementById('error'); // Ambil elemennya dulu
+      let errorElement = document.getElementById('error');
       let angkaError = parseFloat(errorElement.innerText);
       if (angkaError > 100) {
-    errorElement.style.setProperty('color', '#ff4d4d', 'important'); // Merah
-} else if (angkaError > 30) {
-    errorElement.style.setProperty('color', '#38bdf8', 'important'); // Biru
-} else {
-    errorElement.style.setProperty('color', '#4ade80', 'important'); // Hijau
-}
+        errorElement.style.setProperty('color', '#ff4d4d', 'important');
+      } else if (angkaError > 30) {
+        errorElement.style.setProperty('color', '#38bdf8', 'important');
+      } else {
+        errorElement.style.setProperty('color', '#4ade80', 'important'); // Hijau
+      }
 
       let dropdown = document.getElementById("jenisBenda");
-// Ambil teks dari pilihan yang sedang dipilih (Silinder Pejal / Bola Pejal)
-let namaBenda = dropdown.options[dropdown.selectedIndex].text;
+      let namaBenda = dropdown.options[dropdown.selectedIndex].text;
       riwayatData.push({
         benda: namaBenda,
         waktu: data.t,
@@ -438,7 +430,7 @@ let namaBenda = dropdown.options[dropdown.selectedIndex].text;
         i_eks: data.i_eks,
         i_teo: data.i_teo,
         error: data.error
-    });
+      });
       
       tampilkanKesimpulan(data);
       
