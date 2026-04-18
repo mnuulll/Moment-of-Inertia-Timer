@@ -301,6 +301,7 @@
     </div>
 
   <script>
+    let riwayatData = [];
     function showPage(pageId) {
 
         document.querySelectorAll('.page-section').forEach(section => {
@@ -325,7 +326,6 @@
 
     let chartWaktu, chartKecepatan, chartIEks, chartITeo;
     let lastEntryId = 0;
-    let riwayatData = [];
 
     function speak(text) {
       const utterance = new SpeechSynthesisUtterance(text);
@@ -373,8 +373,6 @@
     link.click();
     document.body.removeChild(link);
     
-    speak("Seluruh riwayat percobaan berhasil diunduh");
-}
 
     
     speak("Data berhasil diunduh dalam format CSV");
