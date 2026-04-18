@@ -64,21 +64,50 @@
     .member-card:nth-child(3) { animation-delay: 0.3s; }
     .member-card:nth-child(4) { animation-delay: 0.4s; }
     .member-card:nth-child(5) { animation-delay: 0.5s; }
-    .keterangan-variabel {
-    margin-top: 20px;
-    padding: 15px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
-    text-align: left;
-    display: inline-block;
+    
+.keterangan-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 30px;
 }
+
+.keterangan-variabel {
+    background: rgba(255, 255, 255, 0.05); /* Efek transparan */
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px 40px;
+    border-radius: 15px;
+    min-width: 500px; /* Lebar minimal agar tidak gepeng */
+    text-align: center; /* Judul di tengah */
+}
+
 .grid-keterangan {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    grid-template-columns: 1fr 1fr; /* Membagi dua kolom sama besar */
+    gap: 30px;
+    text-align: left; /* Isi list tetap rapi rata kiri */
 }
-.keterangan-variabel ul { list-style: none; padding: 0; margin: 0; }
-.keterangan-variabel li { font-size: 0.9rem; color: #ccc; }
+
+.grid-keterangan ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.grid-keterangan li {
+    font-size: 0.95rem;
+    color: #e2e8f0;
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.grid-keterangan strong {
+    color: #ffcc00; /* Warna kuning untuk simbol variabel */
+    font-family: 'Times New Roman', serif; /* Agar simbol matematika lebih estetik */
+    font-size: 1.1rem;
+}
+
 
   </style>
 </head>
@@ -173,21 +202,26 @@
             </div>
           </div>
         </div>
-        <div class="keterangan-variabel">
-    <h3>Keterangan Variabel:</h3>
-    <div class="grid-keterangan">
-        <ul>
-            <li><strong>I</strong> : Momen Inersia (kg.m²)</li>
-            <li><strong>m</strong> : Massa Benda (kg)</li>
-            <li><strong>g</strong> : Gravitasi (9.8 m/s²)</li>
-        </ul>
-        <ul>
-            <li><strong>v</strong> : Kecepatan akhir (m/s)</li>
-            <li><strong>h</strong> : Ketinggian (m)</li>
-            <li><strong>t</strong> : Waktu (s)</li>
-        </ul>
+        <div class="keterangan-wrapper">
+    <div class="keterangan-variabel">
+        <h3 style="color: #ffcc00; margin-bottom: 15px;">Keterangan Variabel:</h3>
+        <div class="grid-keterangan">
+            <ul>
+                <li><strong>I</strong> : Momen Inersia (kg.m²)</li>
+                <li><strong>m</strong> : Massa Benda (kg)</li>
+                <li><strong>g</strong> : Gravitasi (9.8 m/s²)</li>
+                <li><strong>v</strong> : Kecepatan (m/s)</li>
+            </ul>
+            <ul>
+                <li><strong>s</strong> : Jarak Lintasan (m)</li>
+                <li><strong>θ</strong> : Sudut Kemiringan (°)</li>
+                <li><strong>r</strong> : Jari-jari Benda (m)</li>
+                <li><strong>t</strong> : Waktu Tempuh (s)</li>
+            </ul>
+        </div>
     </div>
 </div>
+
         <div class="btn-wrapper">
           <button class="btn-start" onclick="showPage('percobaan')">Mulai Pengukuran 🚀</button>
         </div>
