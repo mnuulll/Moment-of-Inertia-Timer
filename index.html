@@ -64,50 +64,12 @@
     .member-card:nth-child(3) { animation-delay: 0.3s; }
     .member-card:nth-child(4) { animation-delay: 0.4s; }
     .member-card:nth-child(5) { animation-delay: 0.5s; }
-    
-.keterangan-wrapper {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin-top: 30px;
-}
-
-.keterangan-variabel {
-    background: rgba(255, 255, 255, 0.05); /* Efek transparan */
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 20px 40px;
-    border-radius: 15px;
-    min-width: 500px; /* Lebar minimal agar tidak gepeng */
-    text-align: center; /* Judul di tengah */
-}
-
-.grid-keterangan {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Membagi dua kolom sama besar */
-    gap: 30px;
-    text-align: left; /* Isi list tetap rapi rata kiri */
-}
-
-.grid-keterangan ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.grid-keterangan li {
-    font-size: 0.95rem;
-    color: #e2e8f0;
-    margin-bottom: 8px;
-    line-height: 1.5;
-}
-
-.grid-keterangan strong {
-    color: #ffcc00; /* Warna kuning untuk simbol variabel */
-    font-family: 'Times New Roman', serif; /* Agar simbol matematika lebih estetik */
-    font-size: 1.1rem;
-}
-
+    .keterangan-wrapper { display: flex; justify-content: center; width: 100%; margin-top: 30px; }
+    .keterangan-variabel { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(5px); border: 1px solid rgba(255, 255, 255, 0.1); padding: 20px 40px; border-radius: 15px; min-width: 500px; text-align: center; }
+    .grid-keterangan { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; text-align: left; }
+    .grid-keterangan ul { list-style: none; padding: 0; margin: 0; }
+    .grid-keterangan li { font-size: 0.95rem; color: #e2e8f0; margin-bottom: 8px; line-height: 1.5; }
+    .grid-keterangan strong { color: white; font-family: 'Times New Roman', serif; font-size: 1.1rem; }
 
   </style>
 </head>
@@ -188,7 +150,7 @@
           </div>
         </div>
         <div style="text-align: center; margin: 25px 0; color: white; font-family: sans-serif; font-size: 1.1rem;">
-          <p class="description4" style="margin-bottom: 10px; color: #FFA500">Rumus Lainnya yang Digunakan:</p>
+          <p class="description4" style="margin-bottom: 10px; color: blue">Rumus Lainnya yang Digunakan:</p>
           <div style="display: flex; justify-content: center; gap: 50px; flex-wrap: wrap; align-items: center; font-weight: bold;">
             <div style="display: inline-flex; align-items: center; font-size: 1.2rem;">
               <span style="font-style: italic; margin-right: 8px;">v =</span>
@@ -203,24 +165,24 @@
           </div>
         </div>
         <div class="keterangan-wrapper">
-    <div class="keterangan-variabel">
-        <h3 style="color: #ffcc00; margin-bottom: 15px;">Keterangan Variabel:</h3>
-        <div class="grid-keterangan">
-            <ul>
+          <div class="keterangan-variabel">
+            <h3 style="color: #ffcc00; margin-bottom: 15px;">Keterangan Variabel:</h3>
+            <div class="grid-keterangan">
+              <ul>
                 <li><strong>I</strong> : Momen Inersia (kg.m²)</li>
                 <li><strong>m</strong> : Massa Benda (kg)</li>
                 <li><strong>g</strong> : Gravitasi (9.8 m/s²)</li>
                 <li><strong>v</strong> : Kecepatan (m/s)</li>
-            </ul>
-            <ul>
+              </ul>
+              <ul>
                 <li><strong>s</strong> : Jarak Lintasan (m)</li>
                 <li><strong>θ</strong> : Sudut Kemiringan (°)</li>
                 <li><strong>r</strong> : Jari-jari Benda (m)</li>
                 <li><strong>t</strong> : Waktu Tempuh (s)</li>
-            </ul>
+              </ul>
+            </div>
+          </div>
         </div>
-    </div>
-</div>
 
         <div class="btn-wrapper">
           <button class="btn-start" onclick="showPage('percobaan')">Mulai Pengukuran 🚀</button>
