@@ -74,40 +74,14 @@
     .grid-keterangan { grid-template-columns: 1fr; gap: 0; }
     .keterangan-variabel { padding: 15px; }
     .grid-keterangan li { font-size: 0.85rem; } 
+    .parameter-card { padding: 20px 10px; }
+    .parameter-title { font-size: 1.3rem; }
+    .comparison-grid { display: flex; flex-direction: row; justify-content: space-evenly; gap: 10px; }
+    .object-column { width: 48%; }
+    .object-column h3 { font-size: 1rem; margin-bottom: 10px }
+    .object-column li, .constant-footer p { font-size: 0.9rem; margin-bottom: 8px; white-space: nowrap; }
+    .parameter-card strong { width: 18px; font-size: 1rem; color: #fff; }}
     .parameter-card {
-        padding: 15px; /* Mengurangi ruang kosong samping */
-    }
-
-    .parameter-title {
-        font-size: 1.2rem; /* Mengecilkan judul utama */
-    }
-
-    .comparison-grid {
-        display: flex;
-        flex-direction: row; /* PAKSA tetap satu baris (kiri-kanan) */
-        justify-content: space-between;
-        gap: 5px; /* Memperkecil jarak antar kolom */
-    }
-
-    .object-column {
-        width: 48%; /* Bagi dua layar secara pas */
-    }
-
-    .object-column h3 {
-        font-size: 0.9rem; /* Mengecilkan nama benda */
-    }
-
-    .object-column li, .constant-footer p {
-        font-size: 0.75rem; /* Mengecilkan ukuran teks data */
-    }
-
-    .parameter-card strong {
-        width: 15px; /* Mengecilkan jarak simbol agar muat */
-        font-size: 0.85rem;
-    }
-}
-    /* Kotak Utama (Background Gelap & Glassmorphism) */
-.parameter-card {
     background: rgba(15, 23, 42, 0.8); /* Warna gelap gambar atas */
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 15px;
