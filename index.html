@@ -73,7 +73,106 @@
     @media (max-width: 600px) {
     .grid-keterangan { grid-template-columns: 1fr; gap: 0; }
     .keterangan-variabel { padding: 15px; }
-    .grid-keterangan li { font-size: 0.85rem; } }
+    .grid-keterangan li { font-size: 0.85rem; } 
+    .parameter-card {
+        padding: 15px; /* Mengurangi ruang kosong samping */
+    }
+
+    .parameter-title {
+        font-size: 1.2rem; /* Mengecilkan judul utama */
+    }
+
+    .comparison-grid {
+        display: flex;
+        flex-direction: row; /* PAKSA tetap satu baris (kiri-kanan) */
+        justify-content: space-between;
+        gap: 5px; /* Memperkecil jarak antar kolom */
+    }
+
+    .object-column {
+        width: 48%; /* Bagi dua layar secara pas */
+    }
+
+    .object-column h3 {
+        font-size: 0.9rem; /* Mengecilkan nama benda */
+    }
+
+    .object-column li, .constant-footer p {
+        font-size: 0.75rem; /* Mengecilkan ukuran teks data */
+    }
+
+    .parameter-card strong {
+        width: 15px; /* Mengecilkan jarak simbol agar muat */
+        font-size: 0.85rem;
+    }
+}
+    /* Kotak Utama (Background Gelap & Glassmorphism) */
+.parameter-card {
+    background: rgba(15, 23, 42, 0.8); /* Warna gelap gambar atas */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 30px;
+    max-width: 600px;
+    margin: 20px auto;
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* Judul Utama Green */
+.parameter-title {
+    color: #22c55e; /* Hijau seperti gambar atas */
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 25px;
+    text-decoration: none; /* Menghilangkan garis bawah agar lebih bersih */
+}
+
+/* Grid Perbandingan 2 Kolom */
+.comparison-grid {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.object-column h3 {
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.object-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+/* Gaya Teks Simbol (Bold White) */
+.parameter-card strong {
+    color: white;
+    font-size: 1.1rem;
+    display: inline-block;
+    width: 25px; /* Biar titik dua lurus */
+}
+
+.object-column li, .constant-footer p {
+    color: #cbd5e1; /* Warna abu-abu terang gambar atas */
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+/* Parameter Konstanta (Center) */
+.constant-footer {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 20px;
+    text-align: center;
+}
+
+.constant-footer p {
+    margin: 5px 0;
+}
+
 
   </style>
 </head>
@@ -214,27 +313,37 @@
           <button onclick="downloadCSV()" style="background:#3b82f6;"> Download 📥 Hasil (CSV)</button>
         </div>
 
-        <div class="keterangan-wrapper">
-          <div class="keterangan-variabel">
-            <h3 style="color: green; margin-bottom: 15px;">Parameter Eksperimen</h3>
-            <div class="grid-keterangan">
-              <ul>
-                <h3 style="color: white; margin-bottom: 15px;">Silinder Pejal</h3>
-                <li><strong>I</strong> : Momen Inersia (kg.m²)</li>
-                <li><strong>m</strong> : Massa Benda (kg)</li>
-                <li><strong>g</strong> : Gravitasi (9.8 m/s²)</li>
-                <li><strong>h</strong> : Ketinggian (m)</li>
-                <li><strong>v</strong> : Kecepatan (m/s)</li>
-              </ul>
-              <ul>
-                <li><strong>s</strong> : Jarak Lintasan (m)</li>
-                <li><strong>θ</strong> : Sudut Kemiringan RAMP (°)</li>
-                <li><strong>r</strong> : Jari-jari Benda (m)</li>
-                <li><strong>t</strong> : Waktu Tempuh (s)</li>
-              </ul>
-            </div>
-          </div>
+        <div class="parameter-card">
+    <h2 class="parameter-title">Parameter Eksperimen</h2>
+
+    <div class="comparison-grid">
+        <!-- Kolom Silinder -->
+        <div class="object-column">
+            <h3>Silinder Pejal</h3>
+            <ul>
+                <li><strong>m</strong> : 0.03128 kg</li>
+                <li><strong>r</strong> : 0.012 m</li>
+            </ul>
         </div>
+
+        <!-- Kolom Bola -->
+        <div class="object-column">
+            <h3>Bola Pejal</h3>
+            <ul>
+                <li><strong>m</strong> : 0.02008 kg</li>
+                <li><strong>r</strong> : 0.0123 m</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Parameter Konstanta di Tengah -->
+    <div class="constant-footer">
+        <p><strong>s</strong> : 0,5 m</p>
+        <p><strong>θ</strong> : 5,5°</p>
+        <p><strong>g</strong> : 9,81 m/s²</p>
+    </div>
+</div>
+
         
         <div style="background:#1e2937; padding:10px; border-radius:16px; margin-bottom:25px; text-align:center;">
           <h3 style="margin:0 0 15px 0; color:white; text-decoration: underline; font-size:1.35rem;">Parameter Eksperimen</h3>
