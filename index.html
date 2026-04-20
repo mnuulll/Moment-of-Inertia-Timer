@@ -129,39 +129,6 @@
     .grid-keterangan-singkat { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; font-size: 0.9rem; color: #ddd; margin-top: 10px; }
     .math-label { font-size: 1.3rem; color: #4CAF50; padding: 5px 15px; border: 1px dashed #4CAF50; border-radius: 5px; }
     .flex-rumus { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; margin-top: 10px; }
-    /* Kotak Rumus */
-.box-rumus-utama {
-  border: 2px solid #22c55e; /* Warna hijau sesuai tema web Anda */
-  background: rgba(34, 197, 94, 0.1);
-  padding: 20px;
-  border-radius: 12px;
-  width: fit-content;
-  margin: 20px auto; /* Membuat kotak ke tengah */
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: white;
-  text-align: center;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-}
-
-/* List Keterangan di Bawah */
-.keterangan-list {
-  display: flex;
-  justify-content: center;
-  gap: 25px;
-  flex-wrap: wrap;
-  margin-top: 15px;
-}
-
-.item-ket {
-  font-size: 1rem;
-  color: #cbd5e1;
-}
-
-.item-ket strong {
-  color: #22c55e;
-}
-
 
   </style>
 </head>
@@ -313,21 +280,21 @@
   </div>
 
   <div class="rumus-card">
-  <h3 class="section-title center-title">Rumus Dasar Teoretis</h3>
-  <p class="text-center">Secara umum, momen inersia benda tegar dirumuskan:</p>
-  
-  <!-- Kotak Rumus Utama -->
-  <div class="box-rumus-utama">
-    $$I = k \cdot m \cdot r^2$$
+    <h3 class="section-title center-title">Rumus Dasar Teoretis</h3>
+    <p class="text-center" style="margin-bottom: 15px;">Secara umum, momen inersia benda tegar dirumuskan:</p>
+    
+    <div class="formula-scroll center-content">
+      <div class="math-formula">
+        <span class="math-label">I = k &cdot; m &cdot; r<sup>2</sup></span>
+      </div>
+    </div>
+    
+    <div class="grid-keterangan-singkat">
+      <span><strong>k</strong> : Konstanta bentuk</span>
+      <span><strong>m</strong> : Massa (kg)</span>
+      <span><strong>r</strong> : Jari-jari (m)</span>
+    </div>
   </div>
-  
-  <!-- Keterangan Variabel di Bawahnya -->
-  <div class="keterangan-list">
-    <div class="item-ket"><strong>k</strong> : Konstanta bentuk</div>
-    <div class="item-ket"><strong>m</strong> : Massa (kg)</div>
-    <div class="item-ket"><strong>r</strong> : Jari-jari (m)</div>
-  </div>
-</div>
 
 
   <!-- TABEL KONSTANTA LENGKAP (DATA 100%) -->
