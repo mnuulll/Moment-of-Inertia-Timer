@@ -94,195 +94,41 @@
     .timeline-flow::before { content: ''; position: absolute; left: 30px; top: 0; bottom: 0; width: 2px; background: rgba(255, 255, 255, 0.1); z-index: 0; }
     .flow-step {  display: flex; width: 100%; max-width: 600px; position: relative; z-index: 1; margin-bottom: 10px; }
     .step-marker { width: 40px; height: 40px; background: #333; border: 2px solid #ffcc00; color: #ffcc00; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.1rem; margin-right: 15px; flex-shrink: 0; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
-
-.flow-step.final .step-marker {
-  background: #ffcc00;
-  color: black;
-  border-color: white;
-}
-
-.step-body {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 15px;
-  border-radius: 8px;
-  flex-grow: 1;
-  border-left: 3px solid #ffcc00;
-}
-
-.flow-step.final .step-body {
-  background: rgba(255, 204, 0, 0.1);
-  border: 1px solid #ffcc00;
-}
-
-.step-label {
-  display: block;
-  font-weight: bold;
-  color: #ddd;
-  margin-bottom: 8px;
-  text-transform: uppercase;
-  font-size: 0.8rem;
-  letter-spacing: 1px;
-}
-
-.math-box {
-  background: rgba(0, 0, 0, 0.3);
-  padding: 8px 12px;
-  border-radius: 5px;
-  font-family: 'Courier New', monospace;
-  font-weight: bold;
-  color: white;
-  display: inline-block;
-  margin-bottom: 5px;
-  border: 1px solid rgba(255,255,255,0.1);
-}
-
-.math-box.sub {
-  margin-top: 5px;
-  font-size: 0.9em;
-  color: #aaa;
-}
-
-.step-desc {
-  font-size: 0.85rem;
-  color: #ccc;
-  margin-top: 5px;
-  font-style: italic;
-}
-
-.flow-arrow {
-  color: rgba(255,255,255,0.3);
-  font-size: 1.5rem;
-  margin: 5px 0 15px 18px; /* Align arrow with timeline line */
-}
-
-/* =========================================
-   STYLE TABEL & UMUM
-   ========================================= */
-.section-title {
-  color: #ffcc00;
-  border-bottom: 2px solid #ffcc00;
-  display: inline-block;
-  margin-bottom: 10px;
-  padding-bottom: 5px;
-}
-
-/* Tabel yang lebih rapat dan rapi */
-.konstanta-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-  background: rgba(0,0,0,0.2);
-}
-
-.konstanta-table th {
-  background: rgba(76, 175, 80, 0.2);
-  color: #4CAF50;
-  padding: 10px;
-  font-size: 0.9rem;
-}
-
-.konstanta-table td {
-  padding: 8px 10px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  font-size: 0.9rem;
-  color: #ddd;
-}
-
-.konstanta-table tr:last-child td {
-  border-bottom: none;
-}
-
-/* Layout Rumus Pendukung */
-.flex-rumus {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
-}
-
-.math-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.math-item .label {
-  font-size: 0.8rem;
-  color: #aaa;
-  margin-bottom: 5px;
-}
-
-/* Mobile Adjustment */
-@media (max-width: 600px) {
-  .timeline-flow::before {
-    left: 20px;
-  }
-  .step-marker {
-    width: 30px;
-    height: 30px;
-    font-size: 0.9rem;
-    margin-right: 10px;
-  }
-  .flow-arrow {
-    margin-left: 11px;
-  }
-  .math-box {
-    font-size: 0.9rem;
-    width: 100%;
-    text-align: center;
-    box-sizing: border-box;
-  }
-}
-    /* =========================================
-   FIX LAYOUT & ALIGNMENT
-   ========================================= */
-
-/* Helper untuk rata tengah */
-.text-center { text-align: center; }
-.center-title { display: block; margin-left: auto; margin-right: auto; text-align: center; width: fit-content; }
-.center-content { display: flex; justify-content: center; }
-.text-justify { text-align: justify; }
-
-/* FIX GAMBAR & CAPTION */
-.centered-flex {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 20px 0;
-  width: 100%;
-}
-
-.responsive-img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 10px;
-  border: 2px solid rgba(255,255,255,0.2);
-  display: block; /* Mencegah gap aneh di bawah gambar */
-}
-
-.caption {
-  font-size: 0.9rem;
-  color: #ccc;
-  margin-top: 12px; /* Jarak aman dari gambar */
-  text-align: center;
-  font-style: italic;
-  display: block;
-  width: 100%;
-  line-height: 1.4;
-}
-.nowrap-fix { display: inline-flex !important; align-items: center; flex-wrap: nowrap; white-space: nowrap;}
-.math-formula { display: inline-flex; align-items: center; font-weight: bold; font-size: 1.1rem; margin: 5px; color: white; }
-.formula-scroll { overflow-x: auto; overflow-y: hidden; white-space: nowrap; padding: 10px 0; text-align: center; width: 100%; -webkit-overflow-scrolling: touch; }
-.fraction { display: inline-flex; flex-direction: column; text-align: center; vertical-align: middle; margin: 0 5px; }
-.numerator { border-bottom: 2px solid white; padding: 0 5px 2px 5px; display: block; }
-.denominator { padding-top: 2px; display: block; }
-.grid-keterangan-singkat { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; font-size: 0.9rem; color: #ddd; margin-top: 10px; }
-.math-label { font-size: 1.3rem; color: #4CAF50; padding: 5px 15px; border: 1px dashed #4CAF50; border-radius: 5px; }
-.flex-rumus { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; margin-top: 10px; }
-.math-item { display: flex; flex-direction: column; align-items: center; }
-
-
+    .flow-step.final .step-marker { background: #ffcc00; color: black; border-color: white; }
+    .step-body { background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 8px; flex-grow: 1; border-left: 3px solid #ffcc00; }
+    .flow-step.final .step-body { background: rgba(255, 204, 0, 0.1); border: 1px solid #ffcc00; }
+    .step-label { display: block; font-weight: bold; color: #ddd; margin-bottom: 8px; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
+    .math-box { background: rgba(0, 0, 0, 0.3); padding: 8px 12px; border-radius: 5px; font-family: 'Courier New', monospace; font-weight: bold; color: white; display: inline-block; margin-bottom: 5px; border: 1px solid rgba(255,255,255,0.1); }
+    .math-box.sub { margin-top: 5px; font-size: 0.9em; color: #aaa; }
+    .step-desc { font-size: 0.85rem; color: #ccc; margin-top: 5px; font-style: italic; }
+    .flow-arrow { color: rgba(255,255,255,0.3); font-size: 1.5rem; margin: 5px 0 15px 18px; }
+    .section-title { color: #ffcc00; border-bottom: 2px solid #ffcc00; display: table !important; margin: 0 auto 15px auto !important; padding-bottom: 5px; text-align: center; width: auto; }
+    .konstanta-table { width: 100%; border-collapse: collapse; margin-top: 10px; background: rgba(0,0,0,0.2); }
+    .konstanta-table th { background: rgba(76, 175, 80, 0.2); color: #4CAF50; padding: 10px; font-size: 0.9rem; }
+    .konstanta-table td { padding: 8px 10px; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem; color: #ddd; }
+    .konstanta-table tr:last-child td { border-bottom: none; }
+    .math-item { display: flex; flex-direction: column; align-items: center; }
+    .math-item .label { font-size: 0.8rem; color: #aaa; margin-bottom: 5px; }
+    @media (max-width: 600px) {
+    .timeline-flow::before { left: 20px; }
+    .step-marker { width: 30px; height: 30px; font-size: 0.9rem; margin-right: 10px; }
+    .flow-arrow { margin-left: 11px; }
+    .text-center { text-align: center; }
+    .center-title { display: block; margin-left: auto; margin-right: auto; text-align: center; width: fit-content; }
+    .center-content { display: flex; justify-content: center; }
+    .text-justify { text-align: justify; }
+    .centered-flex { display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 20px 0; width: 100%; }
+    .responsive-img { max-width: 100%; height: auto; border-radius: 10px; border: 2px solid rgba(255,255,255,0.2); display: block; }
+    .caption { font-size: 0.9rem; color: #ccc; margin-top: 12px; text-align: center; font-style: italic; display: block; width: 100%; line-height: 1.4; }
+    .nowrap-fix { display: inline-flex !important; align-items: center; flex-wrap: nowrap; white-space: nowrap;}
+    .math-formula { display: inline-flex; align-items: center; font-weight: bold; font-size: 1.1rem; margin: 5px; color: white; }
+    .formula-scroll { overflow-x: auto; overflow-y: hidden; white-space: nowrap; padding: 10px 0; text-align: center; width: 100%; -webkit-overflow-scrolling: touch; }
+    .fraction { display: inline-flex; flex-direction: column; text-align: center; vertical-align: middle; margin: 0 5px; }
+    .numerator { border-bottom: 2px solid white; padding: 0 5px 2px 5px; display: block; }
+    .denominator { padding-top: 2px; display: block; }
+    .grid-keterangan-singkat { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; font-size: 0.9rem; color: #ddd; margin-top: 10px; }
+    .math-label { font-size: 1.3rem; color: #4CAF50; padding: 5px 15px; border: 1px dashed #4CAF50; border-radius: 5px; }
+    .flex-rumus { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; margin-top: 10px; }
 
   </style>
 </head>
@@ -339,61 +185,52 @@
         </div>
         
         <div class="content-wrapper">
-    <div class="info-card text-center">
-      <h3 class="section-title center-title">Definisi</h3>
-      <p class="description1 text-justify">
-        <strong>Momen Inersia (I)</strong> adalah ukuran kelembaman benda untuk berotasi pada porosnya. Semakin besar nilai I, benda semakin "malas" atau sulit untuk diputar.
-      </p>
-      <p class="description1" style="margin-top: 10px;">
-        Berbeda dengan massa (m) yang hanya bergantung pada jumlah zat, Momen Inersia bergantung pada:
-        <br>1. Massa benda.
-        <br>2. Bentuk & Ukuran benda.
-        <br>3. Letak sumbu putar.
-      </p>
-    </div>
-  </div>
+          <div class="info-card text-center">
+            <h3 class="section-title center-title">Definisi</h3>
+            <p class="description1 text-justify">
+              <strong>Momen Inersia (I)</strong> adalah ukuran kelembaman benda untuk berotasi pada porosnya. Semakin besar nilai I, benda semakin "malas" atau sulit untuk diputar.
+            </p>
+            <p class="description1" style="margin-top: 10px;"> Berbeda dengan massa (m) yang hanya bergantung pada jumlah zat, Momen Inersia bergantung pada:
+              <br>1. Massa benda.
+              <br>2. Bentuk & Ukuran benda.
+              <br>3. Letak sumbu putar.
+            </p>
+          </div>
+        </div>
+        <div class="img-container1 centered-flex">
+          <img src="https://mnuulll.github.io/Moment-of-Inertia-Timer/inersia.gif" alt="simulasi inersia" style="border-radius: 10px; border: 2px solid rgba(255,255,255,0.2);">
+          <p class="caption">Simulasi benda menggelinding: Benda dengan konstanta (k) terkecil akan sampai lebih dulu.</p>
+        </div>
 
-  <!-- ILUSTRASI SIMULASI -->
-  <div class="img-container1 centered-flex">
-    <img src="https://mnuulll.github.io/Moment-of-Inertia-Timer/inersia.gif" alt="simulasi inersia" style="border-radius: 10px; border: 2px solid rgba(255,255,255,0.2);">
-    <p class="caption">Simulasi benda menggelinding: Benda dengan konstanta (k) terkecil akan sampai lebih dulu.</p>
-  </div>
-
-  <!-- VISUAL ALUR PENURUNAN RUMUS (FEATURE BARU) -->
-  <div class="rumus-card">
-    <h3 style="section-title center-title">Asal-Usul Rumus Eksperimen</h3>
-    <p class="text-center" style="margin-bottom: 20px; font-size: 0.9rem;">Rumus ini diturunkan dari <strong>Hukum Kekekalan Energi Mekanik</strong> pada benda yang menggelinding (Translasi + Rotasi).</p>
-    
-    <div class="timeline-flow">
+        <div class="rumus-card">
+          <h3 style="section-title center-title">Asal-Usul Rumus Eksperimen</h3>
+          <p class="text-center" style="margin-bottom: 20px; font-size: 0.9rem;">Rumus ini diturunkan dari <strong>Hukum Kekekalan Energi Mekanik</strong> pada benda yang menggelinding (Translasi + Rotasi).</p>
+         
+          <div class="timeline-flow">
       
-      <!-- Step 1 -->
-      <div class="flow-step">
-        <div class="step-marker">1</div>
-        <div class="step-body">
-          <span class="step-label">Hukum Kekekalan Energi Mekanik</span>
-          <div class="math-box">EM<sub>puncak</sub> = EM<sub>dasar</sub></div>
-          <p class="step-desc">Energi di posisi awal sama dengan energi di posisi akhir.</p>
-        </div>
-      </div>
+          <div class="flow-step">
+            <div class="step-marker">1</div>
+            <div class="step-body">
+              <span class="step-label">Hukum Kekekalan Energi Mekanik</span>
+              <div class="math-box">EM<sub>puncak</sub> = EM<sub>dasar</sub></div>
+              <p class="step-desc">Energi di posisi awal sama dengan energi di posisi akhir.</p>
+            </div>
+          </div>
 
-      <!-- Arrow -->
-      <div class="flow-arrow">⬇</div>
+          <div class="flow-arrow">⬇</div>
 
-      <!-- Step 2 -->
-      <div class="flow-step">
-        <div class="step-marker">2</div>
-        <div class="step-body">
-          <span class="step-label">Jabarkan Energi (Potensial & Kinetik)</span>
-          <div class="math-box">mgh = EK<sub>trans</sub> + EK<sub>rot</sub></div>
-          <div class="math-box sub">mgh = &frac12;mv<sup>2</sup> + &frac12;I&omega;<sup>2</sup></div>
-          <p class="step-desc">Benda memiliki kecepatan linier (v) dan kecepatan sudut (ω).</p>
-        </div>
-      </div>
+          <div class="flow-step">
+            <div class="step-marker">2</div>
+            <div class="step-body">
+              <span class="step-label">Jabarkan Energi (Potensial & Kinetik)</span>
+              <div class="math-box">mgh = EK<sub>trans</sub> + EK<sub>rot</sub></div>
+              <div class="math-box sub">mgh = &frac12;mv<sup>2</sup> + &frac12;I&omega;<sup>2</sup></div>
+              <p class="step-desc">Benda memiliki kecepatan linier (v) dan kecepatan sudut (ω).</p>
+            </div>
+          </div>
 
-      <!-- Arrow -->
-      <div class="flow-arrow">⬇</div>
+          <div class="flow-arrow">⬇</div>
 
-      <!-- Step 3 -->
       <div class="flow-step">
         <div class="step-marker">3</div>
         <div class="step-body">
@@ -572,11 +409,10 @@
     </div>
   </div>
 
-  <!-- BUTTON START -->
-  <div class="btn-wrapper">
-    <button class="btn-start" onclick="showPage('percobaan')">Mulai Pengukuran 🚀</button>
-  </div>
-</div>
+        <div class="btn-wrapper">
+          <button class="btn-start" onclick="showPage('percobaan')">Mulai Pengukuran 🚀</button>
+        </div>
+      </div>
 
       <div id="percobaan" class="page-section">
         <div class="header">
