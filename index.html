@@ -90,54 +90,10 @@
     .object-column li, .constant-footer p { color: #cbd5e1; font-size: 1rem; margin-bottom: 10px; }
     .constant-footer { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center; }
     .constant-footer p { margin: 5px 0; }
-    /* =========================================
-   STYLE VISUAL DERIVATION (TIMELINE)
-   ========================================= */
-.timeline-flow {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px 0;
-  position: relative;
-}
-
-/* Garis vertikal penghubung */
-.timeline-flow::before {
-  content: '';
-  position: absolute;
-  left: 30px; /* Posisi garis di kiri lingkaran */
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: rgba(255, 255, 255, 0.1);
-  z-index: 0;
-}
-
-.flow-step {
-  display: flex;
-  width: 100%;
-  max-width: 600px;
-  position: relative;
-  z-index: 1;
-  margin-bottom: 10px;
-}
-
-.step-marker {
-  width: 40px;
-  height: 40px;
-  background: #333;
-  border: 2px solid #ffcc00;
-  color: #ffcc00;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 1.1rem;
-  margin-right: 15px;
-  flex-shrink: 0; /* Agar lingkaran tidak gepeng */
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
-}
+    .timeline-flow { display: flex; flex-direction: column; align-items: center; margin: 20px 0; position: relative; }
+    .timeline-flow::before { content: ''; position: absolute; left: 30px; top: 0; bottom: 0; width: 2px; background: rgba(255, 255, 255, 0.1); z-index: 0; }
+    .flow-step {  display: flex; width: 100%; max-width: 600px; position: relative; z-index: 1; margin-bottom: 10px; }
+    .step-marker { width: 40px; height: 40px; background: #333; border: 2px solid #ffcc00; color: #ffcc00; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.1rem; margin-right: 15px; flex-shrink: 0; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
 
 .flow-step.final .step-marker {
   background: #ffcc00;
@@ -210,13 +166,6 @@
   padding-bottom: 5px;
 }
 
-.caption {
-  font-size: 0.8rem;
-  color: #aaa;
-  margin-top: 5px;
-  font-style: italic;
-}
-
 /* Tabel yang lebih rapat dan rapi */
 .konstanta-table {
   width: 100%;
@@ -284,6 +233,55 @@
     box-sizing: border-box;
   }
 }
+    /* =========================================
+   FIX LAYOUT & ALIGNMENT
+   ========================================= */
+
+/* Helper untuk rata tengah */
+.text-center { text-align: center; }
+.center-title { display: block; margin-left: auto; margin-right: auto; text-align: center; width: fit-content; }
+.center-content { display: flex; justify-content: center; }
+.text-justify { text-align: justify; }
+
+/* FIX GAMBAR & CAPTION */
+.centered-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+  width: 100%;
+}
+
+.responsive-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 2px solid rgba(255,255,255,0.2);
+  display: block; /* Mencegah gap aneh di bawah gambar */
+}
+
+.caption {
+  font-size: 0.9rem;
+  color: #ccc;
+  margin-top: 12px; /* Jarak aman dari gambar */
+  text-align: center;
+  font-style: italic;
+  display: block;
+  width: 100%;
+  line-height: 1.4;
+}
+.nowrap-fix { display: inline-flex !important; align-items: center; flex-wrap: nowrap; white-space: nowrap;}
+.math-formula { display: inline-flex; align-items: center; font-weight: bold; font-size: 1.1rem; margin: 5px; color: white; }
+.formula-scroll { overflow-x: auto; overflow-y: hidden; white-space: nowrap; padding: 10px 0; text-align: center; width: 100%; -webkit-overflow-scrolling: touch; }
+.fraction { display: inline-flex; flex-direction: column; text-align: center; vertical-align: middle; margin: 0 5px; }
+.numerator { border-bottom: 2px solid white; padding: 0 5px 2px 5px; display: block; }
+.denominator { padding-top: 2px; display: block; }
+.grid-keterangan-singkat { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; font-size: 0.9rem; color: #ddd; margin-top: 10px; }
+.math-label { font-size: 1.3rem; color: #4CAF50; padding: 5px 15px; border: 1px dashed #4CAF50; border-radius: 5px; }
+.flex-rumus { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; margin-top: 10px; }
+.math-item { display: flex; flex-direction: column; align-items: center; }
+
 
 
   </style>
@@ -341,9 +339,9 @@
         </div>
         
         <div class="content-wrapper">
-    <div class="info-card">
-      <h3 class="section-title">Definisi</h3>
-      <p class="description1">
+    <div class="info-card text-center">
+      <h3 class="section-title center-title">Definisi</h3>
+      <p class="description1 text-justify">
         <strong>Momen Inersia (I)</strong> adalah ukuran kelembaman benda untuk berotasi pada porosnya. Semakin besar nilai I, benda semakin "malas" atau sulit untuk diputar.
       </p>
       <p class="description1" style="margin-top: 10px;">
@@ -356,14 +354,14 @@
   </div>
 
   <!-- ILUSTRASI SIMULASI -->
-  <div class="img-container1">
+  <div class="img-container1 centered-flex">
     <img src="https://mnuulll.github.io/Moment-of-Inertia-Timer/inersia.gif" alt="simulasi inersia" style="border-radius: 10px; border: 2px solid rgba(255,255,255,0.2);">
     <p class="caption">Simulasi benda menggelinding: Benda dengan konstanta (k) terkecil akan sampai lebih dulu.</p>
   </div>
 
   <!-- VISUAL ALUR PENURUNAN RUMUS (FEATURE BARU) -->
   <div class="rumus-card">
-    <h3 style="color: #ffcc00; text-align: center; margin-bottom: 20px;">Asal-Usul Rumus Eksperimen</h3>
+    <h3 style="section-title center-title">Asal-Usul Rumus Eksperimen</h3>
     <p class="text-center" style="margin-bottom: 20px; font-size: 0.9rem;">Rumus ini diturunkan dari <strong>Hukum Kekekalan Energi Mekanik</strong> pada benda yang menggelinding (Translasi + Rotasi).</p>
     
     <div class="timeline-flow">
@@ -427,8 +425,8 @@
         <div class="step-body">
           <span class="step-label" style="color: #ffcc00;">RUMUS AKHIR EKSPERIMEN</span>
           <div class="formula-scroll">
-            <div class="math-formula large">
-              <span style="font-style: italic; margin-right: 10px;">I<sub>eks</sub> =</span>
+            <div class="math-formula nowrap-fix">
+              <span style="font-style: italic; margin-right: 10px; font-size: 1.2rem;">I<sub>eks</sub> =</span>
               <div class="fraction">
                 <span class="numerator">2m(gh - 0,5v<sup>2</sup>)r<sup>2</sup></span>
                 <span class="denominator">v<sup>2</sup></span>
@@ -438,6 +436,23 @@
         </div>
       </div>
 
+    </div>
+  </div>
+
+  <div class="rumus-card">
+    <h3 class="section-title center-title">Rumus Dasar Teoretis</h3>
+    <p class="text-center" style="margin-bottom: 15px;">Secara umum, momen inersia benda tegar dirumuskan:</p>
+    
+    <div class="formula-scroll center-content">
+      <div class="math-formula">
+        <span class="math-label">I = k &cdot; m &cdot; r<sup>2</sup></span>
+      </div>
+    </div>
+    
+    <div class="grid-keterangan-singkat">
+      <span><strong>k</strong> : Konstanta bentuk</span>
+      <span><strong>m</strong> : Massa (kg)</span>
+      <span><strong>r</strong> : Jari-jari (m)</span>
     </div>
   </div>
 
@@ -506,24 +521,31 @@
 
   <!-- RUMUS PENDUKUNG LAINNYA -->
   <div class="rumus-card">
-    <p class="description4" style="color: #2196F3;">Rumus Kinematika Pendukung:</p>
+    <h3 class="section-title center-title">Rumus Kinematika Pendukung</h3>
     <div class="flex-rumus">
+      
+      <!-- Rumus Kecepatan -->
       <div class="math-item">
         <span class="label">Kecepatan Akhir (v)</span>
-        <div class="math-formula">
-          <span style="font-style: italic; margin-right: 8px;">v =</span>
-          <div class="fraction">
-            <span class="numerator">2s</span>
-            <span class="denominator">t</span>
+        <div class="formula-scroll">
+          <div class="math-formula nowrap-fix">
+            <span style="font-style: italic; margin-right: 8px;">v =</span>
+            <div class="fraction">
+              <span class="numerator">2s</span>
+              <span class="denominator">t</span>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- Rumus Ketinggian -->
       <div class="math-item">
         <span class="label">Ketinggian (h)</span>
         <div class="math-formula">
           <span style="font-style: italic;">h = s &times; sin(&theta;)</span>
         </div>
       </div>
+
     </div>
   </div>
 
