@@ -765,13 +765,42 @@ async function kirimParameterManual() {
     window.onload = () => {
       initCharts();
       db.ref('data').on('value', updateData);
-      db.ref('control/massa').on('value', (snapshot) => {
+      // Update parameter aktif (m dan r)
+db.ref('control/massa').on('value', (snapshot) => {
   let val = snapshot.val();
-  if (val && !isNaN(val)) document.getElementById('infoMassa').innerText = val.toFixed(6) + " kg";
+  if (val && !isNaN(val)) {
+    document.getElementById('paramM').innerText = val.toFixed(6);
+    document.getElementById('infoMassa').innerText = val.toFixed(6) + " kg";
+  } else {
+    // Jika tidak ada parameter manual, tampilkan nilai default berdasarkan jenis benda
+    // Ambil dari dropdown atau nilai yang tersimpan di ESP32? 
+    // Alternatif: baca dari control/jenisBenda lalu hitung default
+    let jenis = document.getElementById('jenisBenda').value;
+    if (jenis == "0") {
+      document.getElementById('paramM').innerText = "0.018000";
+      document.getElementById('infoMassa').innerText = "0.018000 kg";
+    } else {
+      document.getElementById('paramM').innerText = "0.020080";
+      document.getElementById('infoMassa').innerText = "0.020080 kg";
+    }
+  }
 });
+
 db.ref('control/jarijari').on('value', (snapshot) => {
   let val = snapshot.val();
-  if (val && !isNaN(val)) document.getElementById('infoJari').innerText = val.toFixed(6) + " m";
+  if (val && !isNaN(val)) {
+    document.getElementById('paramR').innerText = val.toFixed(6);
+    document.getElementById('infoJari').innerText = val.toFixed(6) + " m";
+  } else {
+    let jenis = document.getElementById('jenisBenda').value;
+    if (jenis == "0") {
+      document.getElementById('paramR').innerText = "0.012000";
+      document.getElementById('infoJari').innerText = "0.012000 m";
+    } else {
+      document.getElementById('paramR').innerText = "0.012300";
+      document.getElementById('infoJari').innerText = "0.012300 m";
+    }
+  }
 });
     };
   </script>
