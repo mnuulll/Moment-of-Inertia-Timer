@@ -416,6 +416,7 @@
           <option value="1">Bola Pejal</option>
           </select>
           <button onclick="kirimPilihan()">Pilih Jenis Benda</button>
+          <button onclick="resetParameterManual()" style="background:#6b7280;">↺ Reset Parameter</button>
           <button onclick="mulaiProgram()" style="background:#2323ff;">▶ Mulai Program</button>
           <button onclick="resetESP()" style="background:#ef4444;">🔄 Reset Alat</button>
           <button onclick="downloadCSV()" style="background:#3b82f6;"> Download 📥 Hasil (CSV)</button>
@@ -597,6 +598,14 @@
       speak("Jenis Benda sudah dikirm");
     }
 
+    async function resetParameterManual() {
+  await db.ref('control/massa').remove();
+  await db.ref('control/jarijari').remove();
+  speak("Parameter manual dihapus, kembali ke nilai default benda");
+  document.getElementById('inputMassa').value = '';
+  document.getElementById('inputJari').value = '';
+}
+
     async function mulaiProgram() {
       db.ref('control/start').set(1);
       speak("Alat sudah siap, lepaskan benda dari atas ramp");
@@ -766,6 +775,14 @@ async function kirimParameterManual() {
     window.onload = () => {
       initCharts();
       db.ref('data').on('value', updateData);
+      db.ref('control/massa').on('value', (snapshot) => {
+  let val = snapshot.val();
+  if (val && !isNaN(val)) document.getElementById('infoMassa').innerText = val.toFixed(6) + " kg";
+});
+db.ref('control/jarijari').on('value', (snapshot) => {
+  let val = snapshot.val();
+  if (val && !isNaN(val)) document.getElementById('infoJari').innerText = val.toFixed(6) + " m";
+});
     };
   </script>
 </body>
