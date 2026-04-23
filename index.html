@@ -419,6 +419,21 @@
           <button onclick="mulaiProgram()" style="background:#2323ff;">▶ Mulai Program</button>
           <button onclick="resetESP()" style="background:#ef4444;">🔄 Reset Alat</button>
           <button onclick="downloadCSV()" style="background:#3b82f6;"> Download 📥 Hasil (CSV)</button>
+          <div style="margin-top: 20px; border-top: 1px solid #334155; padding-top: 20px;">
+            <h3> Masukkan Massa & Jari-jari Manual</h3>
+            <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+              <div>
+                <label>Massa (gram): </label>
+                <input type="number" id="inputMassa" step="0.001" placeholder="misal: 20.08" style="padding: 8px; border-radius: 8px; width: 130px;">
+              </div>
+              <div>
+                <label>Jari-jari (cm): </label>
+                <input type="number" id="inputJari" step="0.001" placeholder="misal: 1.23" style="padding: 8px; border-radius: 8px; width: 130px;">
+              </div>
+              <button onclick="kirimParameterManual()" style="background:#f59e0b;">✏️ Kirim Parameter</button>
+            </div>
+            <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 10px;">*Satuan akan dikonversi ke kg dan meter otomatis</p>
+          </div>
         </div>
 
         <div class="parameter-card">
@@ -440,6 +455,8 @@
             </div>
           </div>
           <div class="constant-footer">
+            <p><strong>m aktif</strong> : <span id="infoMassa">-</span></p>
+            <p><strong>r aktif</strong> : <span id="infoJari">-</span></p>
             <p><strong>s</strong> : 0,5 m</p>
             <p><strong>θ</strong> : 5,5°</p>
             <p><strong>g</strong> : 9,81 m/s²</p>
@@ -613,6 +630,27 @@
     
       speak("Data berhasil diunduh");
     }
+    // Fungsi untuk mengirim massa dan jari-jari manual ke Firebase
+async function kirimParameterManual() {
+  let massaGram = parseFloat(document.getElementById('inputMassa').value);
+  let jariCm   = parseFloat(document.getElementById('inputJari').value);
+
+  if (isNaN(massaGram) || isNaN(jariCm)) {
+    speak("Masukkan angka yang valid untuk massa dan jari-jari");
+    return;
+  }
+
+  // Konversi satuan
+  let massaKg  = massaGram / 1000;
+  let jariMeter = jariCm / 100;
+
+  // Kirim ke Firebase
+  await db.ref('control/massa').set(massaKg);
+  await db.ref('control/jarijari').set(jariMeter);
+
+  speak(`Parameter dikirim: massa ${massaGram} gram, jari-jari ${jariCm} cm`);
+  console.log(`Manual param: m=${massaKg} kg, r=${jariMeter} m`);
+}
 
     function tampilkanKesimpulan(data) {
       const iEks = parseFloat(data.i_eks || 0);
