@@ -130,6 +130,13 @@
     .grid-keterangan-singkat { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; font-size: 0.9rem; color: #ddd; margin-top: 10px; }
     .math-label { font-size: 1.3rem; color: #4CAF50; padding: 5px 15px; border: 1px dashed #4CAF50; border-radius: 5px; }
     .flex-rumus { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; margin-top: 10px; }
+    .parameter-card p { display: flex; justify-content: center; align-items: baseline; gap: 8px;
+  flex-wrap: wrap;
+}
+.parameter-card strong {
+  min-width: 100px;
+  text-align: right;
+}
 
   </style>
 </head>
@@ -443,11 +450,11 @@
 
         <div class="parameter-card">
   <h2 class="parameter-title">Parameter Eksperimen Aktif</h2>
-  <div style="text-align: center; margin-bottom: 15px;">
-    <p><strong>Massa (m)</strong> : <span id="paramM">-</span> kg</p>
-    <p><strong>Jari-jari (r)</strong> : <span id="paramR">-</span> m</p>
+  <div style="text-align: center;">
+    <p style="margin: 8px 0;"><strong>Massa (m) :</strong> <span id="paramM">-</span> kg</p>
+    <p style="margin: 8px 0;"><strong>Jari-jari (r) :</strong> <span id="paramR">-</span> m</p>
   </div>
-  <div class="constant-footer">
+  <div class="constant-footer" style="margin-top: 15px;">
     <p><strong>s</strong> : 0,5 m</p>
     <p><strong>θ</strong> : 5,5°</p>
     <p><strong>g</strong> : 9,81 m/s²</p>
