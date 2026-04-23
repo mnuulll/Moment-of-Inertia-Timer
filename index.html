@@ -130,13 +130,8 @@
     .grid-keterangan-singkat { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; font-size: 0.9rem; color: #ddd; margin-top: 10px; }
     .math-label { font-size: 1.3rem; color: #4CAF50; padding: 5px 15px; border: 1px dashed #4CAF50; border-radius: 5px; }
     .flex-rumus { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; margin-top: 10px; }
-    .parameter-card p { display: flex; justify-content: center; align-items: baseline; gap: 8px;
-  flex-wrap: wrap;
-}
-.parameter-card strong {
-  min-width: 100px;
-  text-align: right;
-}
+    .parameter-card p { display: flex; justify-content: center; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+    .parameter-card strong { min-width: 100px; text-align: right; }
 
   </style>
 </head>
@@ -428,38 +423,38 @@
           <button onclick="resetESP()" style="background:#ef4444;">🔄 Reset Alat</button>
           <button onclick="downloadCSV()" style="background:#3b82f6;"> Download 📥 Hasil (CSV)</button>
           <div style="margin-top: 20px; border-top: 1px solid #334155; padding-top: 20px;">
-  <h3>Masukkan Massa & Jari-jari Manual</h3>
-  <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 10px;">
-    <div>
-      <label>Massa (gram):</label>
-      <input type="number" id="inputMassa" step="0.001" placeholder="misal: 2.8" style="padding: 8px; border-radius: 8px; width: 140px;">
-    </div>
-    <div>
-      <label>Jari-jari (cm):</label>
-      <input type="number" id="inputJari" step="0.001" placeholder="misal: 1.3" style="padding: 8px; border-radius: 8px; width: 140px;">
-    </div>
-  </div>
-  <div style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 15px; text-align: center;">
-    *Satuan akan dikonversi ke kg dan meter otomatis
-  </div>
-  <div style="text-align: center;">
-    <button onclick="kirimParameterManual()" style="background:#f59e0b; padding: 10px 20px;">✏️ Kirim Parameter</button>
-  </div>
-</div>
+            <h3>Masukkan Massa & Jari-jari Manual</h3>
+            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 10px;">
+              <div>
+                <label>Massa (gram):</label>
+                <input type="number" id="inputMassa" step="0.001" placeholder="misal: 2.8" style="padding: 8px; border-radius: 8px; width: 140px;">
+              </div>
+              <div>
+                <label>Jari-jari (cm):</label>
+                <input type="number" id="inputJari" step="0.001" placeholder="misal: 1.3" style="padding: 8px; border-radius: 8px; width: 140px;">
+              </div>
+            </div>
+            <div style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 15px; text-align: center;">
+              *Satuan akan dikonversi ke kg dan meter otomatis
+            </div>
+            <div style="text-align: center;">
+              <button onclick="kirimParameterManual()" style="background:#f59e0b; padding: 10px 20px;">✏️ Kirim Parameter</button>
+            </div>
+          </div>
         </div>
 
         <div class="parameter-card">
-  <h2 class="parameter-title">Parameter Eksperimen Aktif</h2>
-  <div style="text-align: center;">
-    <p style="margin: 8px 0;"><strong>Massa (m) :</strong> <span id="paramM">-</span> kg</p>
-    <p style="margin: 8px 0;"><strong>Jari-jari (r) :</strong> <span id="paramR">-</span> m</p>
-  </div>
-  <div class="constant-footer" style="margin-top: 15px;">
-    <p><strong>s</strong> : 0,5 m</p>
-    <p><strong>θ</strong> : 5,5°</p>
-    <p><strong>g</strong> : 9,81 m/s²</p>
-  </div>
-</div>
+          <h2 class="parameter-title">Parameter Eksperimen Aktif</h2>
+          <div style="text-align: center;">
+            <p style="margin: 8px 0;"><strong>Massa (m) :</strong> <span id="paramM">-</span> kg</p>
+            <p style="margin: 8px 0;"><strong>Jari-jari (r) :</strong> <span id="paramR">-</span> m</p>
+          </div>
+          <div class="constant-footer" style="margin-top: 15px;">
+            <p><strong>s</strong> : 0,5 m</p>
+            <p><strong>θ</strong> : 5,5°</p>
+            <p><strong>g</strong> : 9,81 m/s²</p>
+          </div>
+        </div>
 
         <div class="cards">
           <div class="card"><h3>Waktu</h3><p id="waktu">0.00000 s</p></div>
@@ -772,43 +767,39 @@ async function kirimParameterManual() {
     window.onload = () => {
       initCharts();
       db.ref('data').on('value', updateData);
-      // Update parameter aktif (m dan r)
-db.ref('control/massa').on('value', (snapshot) => {
-  let val = snapshot.val();
-  if (val && !isNaN(val)) {
-    document.getElementById('paramM').innerText = val.toFixed(6);
-    document.getElementById('infoMassa').innerText = val.toFixed(6) + " kg";
-  } else {
-    // Jika tidak ada parameter manual, tampilkan nilai default berdasarkan jenis benda
-    // Ambil dari dropdown atau nilai yang tersimpan di ESP32? 
-    // Alternatif: baca dari control/jenisBenda lalu hitung default
-    let jenis = document.getElementById('jenisBenda').value;
-    if (jenis == "0") {
-      document.getElementById('paramM').innerText = "0.018000";
-      document.getElementById('infoMassa').innerText = "0.018000 kg";
-    } else {
-      document.getElementById('paramM').innerText = "0.020080";
-      document.getElementById('infoMassa').innerText = "0.020080 kg";
-    }
-  }
-});
+      db.ref('control/massa').on('value', (snapshot) => {
+        let val = snapshot.val();
+        if (val && !isNaN(val)) {
+          document.getElementById('paramM').innerText = val.toFixed(6);
+          document.getElementById('infoMassa').innerText = val.toFixed(6) + " kg";
+        } else {
+        let jenis = document.getElementById('jenisBenda').value;
+        if (jenis == "0") {
+          document.getElementById('paramM').innerText = "0.000000";
+          document.getElementById('infoMassa').innerText = "0.000000 kg";
+        } else {
+          document.getElementById('paramM').innerText = "0.000000";
+          document.getElementById('infoMassa').innerText = "0.000000 kg";
+        }
+        }
+        });
 
-db.ref('control/jarijari').on('value', (snapshot) => {
-  let val = snapshot.val();
-  if (val && !isNaN(val)) {
-    document.getElementById('paramR').innerText = val.toFixed(6);
-    document.getElementById('infoJari').innerText = val.toFixed(6) + " m";
-  } else {
-    let jenis = document.getElementById('jenisBenda').value;
-    if (jenis == "0") {
-      document.getElementById('paramR').innerText = "0.012000";
-      document.getElementById('infoJari').innerText = "0.012000 m";
-    } else {
-      document.getElementById('paramR').innerText = "0.012300";
-      document.getElementById('infoJari').innerText = "0.012300 m";
-    }
-  }
-});
+      db.ref('control/jarijari').on('value', (snapshot) => {
+        let val = snapshot.val();
+        if (val && !isNaN(val)) {
+          document.getElementById('paramR').innerText = val.toFixed(6);
+          document.getElementById('infoJari').innerText = val.toFixed(6) + " m";
+        } else {
+        let jenis = document.getElementById('jenisBenda').value;
+        if (jenis == "0") {
+          document.getElementById('paramR').innerText = "0.000000";
+          document.getElementById('infoJari').innerText = "0.000000 m";
+        } else {
+          document.getElementById('paramR').innerText = "0.000000";
+          document.getElementById('infoJari').innerText = "0.000000 m";
+        }
+      }
+     });
     };
   </script>
 </body>
